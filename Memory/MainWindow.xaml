@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="438.965" Width="803.678">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="310,176,0,0" TextWrapping="Wrap" Text="Enjoy :)" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="264,71,233.6,315.6" TextWrapping="Wrap" Text="Welkom to memory:" VerticalAlignment="Center" Width="300" FontFamily="Calibri" FontSize="16" TextAlignment="Center" BorderThickness="1.5"/>
+        <Button x:Name="Startbtn" Content="Start" HorizontalAlignment="Left" Height="70" Margin="317,173,0,0" VerticalAlignment="Top" Width="175" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336"/>
+        <Button x:Name="Highscorebtn" Content="Highscore" HorizontalAlignment="Left" Height="70" Margin="317,288,0,0" VerticalAlignment="Top" Width="175" FontFamily="Calibri" FontSize="20"/>
+        <Button x:Name="button" Content="Instellingen" HorizontalAlignment="Left" Height="55" Margin="39,38,0,0" VerticalAlignment="Top" Width="95" FontFamily="Calibri" FontSize="16" Click="button_Click"/>
 
     </Grid>
 </Window>

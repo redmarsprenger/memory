@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace Memory
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for instellingen.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class instellingen : Page
     {
-        public MainWindow()
+        public instellingen()
         {
             InitializeComponent();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            instellingen ins = new instellingen();
-            this.Content = ins;
         }
     }
 }
