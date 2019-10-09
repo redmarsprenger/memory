@@ -33,12 +33,14 @@ namespace Memory
 
         private void Startbtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("SpelKeuzePage.xaml", UriKind.Relative));
         }
 
         private void Highscorebtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("HighScorePage.xaml", UriKind.Relative));
         }
     }
 }

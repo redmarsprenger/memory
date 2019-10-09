@@ -56,12 +56,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HighScorePage.xaml.cs">
+      <DependentUpon>HighScorePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InstellingenPage.xaml.cs">
       <DependentUpon>InstellingenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpelKeuzePage.xaml.cs">
+      <DependentUpon>SpelKeuzePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WelkomPage.xaml.cs">
       <DependentUpon>WelkomPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="HighScorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InstellingenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SpelKeuzePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WelkomPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
