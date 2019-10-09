@@ -8,7 +8,209 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InstellingenPage">
 
+    <Page.Resources>
+
+        <!--#region Brushes -->
+
+        <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF333333"/>
+        <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF333333"/>
+
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="#FF000000"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Glyph" Color="#FF000000"/>
+
+        <SolidColorBrush x:Key="RadioButton.MouseOver.On.Background" Color="#FF4C91C8"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.On.Border" Color="#FF4C91C8"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.On.Glyph" Color="#FFFFFFFF"/>
+
+        <SolidColorBrush x:Key="RadioButton.Disabled.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="RadioButton.Disabled.Border" Color="#FF999999"/>
+        <SolidColorBrush x:Key="RadioButton.Disabled.Glyph" Color="#FF999999"/>
+
+        <SolidColorBrush x:Key="RadioButton.Disabled.On.Background" Color="#FFCCCCCC"/>
+        <SolidColorBrush x:Key="RadioButton.Disabled.On.Border" Color="#FFCCCCCC"/>
+        <SolidColorBrush x:Key="RadioButton.Disabled.On.Glyph" Color="#FFA3A3A3"/>
+
+        <SolidColorBrush x:Key="RadioButton.Pressed.Background" Color="#FF999999"/>
+        <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="#FF999999"/>
+        <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="#FFFFFFFF"/>
+
+        <SolidColorBrush x:Key="RadioButton.Checked.Background" Color="#FF0063B1"/>
+        <SolidColorBrush x:Key="RadioButton.Checked.Border" Color="#FF0063B1"/>
+        <SolidColorBrush x:Key="RadioButton.Checked.Glyph" Color="#FFFFFFFF"/>
+
+        <!--#endregion-->
+
+        <Style x:Key="ToggleSwitchTopStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid x:Name="templateRoot" 
+							  Background="Transparent" 
+							  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Duration="0:0:0.2" Storyboard.TargetName="normalBorder" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetName="hoverBorder" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Fill" Duration="0:0:0.2">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.MouseOver.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMarkOn" Storyboard.TargetProperty="Fill" Duration="0:0:0.2">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.MouseOver.On.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0" Storyboard.TargetName="pressedBorder" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Fill" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Pressed.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="checkedBorder" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.On.Border}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="checkedBorder" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.On.Background}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation To="1" Duration="0" Storyboard.TargetName="disabledBorder" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Fill" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMarkOn" Storyboard.TargetProperty="Fill" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.On.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Unchecked"/>
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Fill" Duration="0">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Static.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="optionMark">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="12"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Checked.Glyph}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="hoverBorder" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.MouseOver.On.Border}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="hoverBorder" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.MouseOver.On.Background}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation To="1" Duration="0" Storyboard.TargetName="optionMarkOn" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <DoubleAnimation To="1" Duration="0" Storyboard.TargetName="checkedBorder" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="disabledBorder" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.On.Border}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="disabledBorder" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RadioButton.Disabled.On.Background}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="Focused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ContentPresenter x:Name="contentPresenter" 
+											  Focusable="False" RecognizesAccessKey="True" 
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+											  Margin="{TemplateBinding Padding}" 
+											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Grid x:Name="markGrid" Grid.Row="1" Margin="0 8 0 2" Width="44" Height="20"
+								  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <Border x:Name="normalBorder" Opacity="1" BorderThickness="2" CornerRadius="10"
+										BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource RadioButton.Static.Background}"/>
+                                <Border x:Name="checkedBorder" Opacity="0" BorderThickness="2" CornerRadius="10"
+										BorderBrush="{StaticResource  RadioButton.Checked.Border}" Background="{StaticResource RadioButton.Checked.Background}"/>
+                                <Border x:Name="hoverBorder" Opacity="0" BorderThickness="2" CornerRadius="10"
+										BorderBrush="{StaticResource RadioButton.MouseOver.Border}" Background="{StaticResource RadioButton.MouseOver.Background}"/>
+                                <Border x:Name="pressedBorder" Opacity="0" BorderThickness="2" CornerRadius="10"
+										BorderBrush="{StaticResource RadioButton.Pressed.Border}" Background="{StaticResource RadioButton.Pressed.Background}"/>
+                                <Border x:Name="disabledBorder" Opacity="0" BorderThickness="2" CornerRadius="10"
+										BorderBrush="{StaticResource RadioButton.Disabled.Border}" Background="{StaticResource RadioButton.Disabled.Background}"/>
+                                <Ellipse x:Name="optionMark"
+										 Height="10" Width="10" Fill="{StaticResource RadioButton.Static.Glyph}" StrokeThickness="0" 
+										 VerticalAlignment="Center" Margin="5,0" RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform X="-12"/>
+                                        </TransformGroup>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                <Ellipse x:Name="optionMarkOn" Opacity="0"
+										 Height="10" Width="10" Fill="{StaticResource RadioButton.Checked.Glyph}" StrokeThickness="0" 
+										 VerticalAlignment="Center" Margin="5,0" RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform X="12"/>
+                                        </TransformGroup>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="White" Width="774.4" Height="441">
-        
+
+        <Button x:Name="btnTerug" Content="Terug" Margin="32,31,652.4,347" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Background="White" Click="BtnTerug_Click" />
+
+
+        <Label x:Name="lblMusic" Content="Muziek" HorizontalAlignment="Left" Margin="304,83,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
+        <Label x:Name="lblSound" Content="Geluids effecten" HorizontalAlignment="Left" Margin="304,126,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
+
+        <ToggleButton x:Name="ToggleSwitchMusic" FontFamily="Sergio UI" FontSize="16"
+              Style="{DynamicResource ToggleSwitchTopStyle}"
+              IsChecked="False" Margin="449,83,281.4,329" VerticalAlignment="Center" HorizontalAlignment="Center"
+        />
+        <ToggleButton x:Name="ToggleSwitchSound" FontFamily="Sergio UI" FontSize="16"
+                      Style="{DynamicResource ToggleSwitchTopStyle}"
+                      IsChecked="False" Margin="449,126,281.4,286" VerticalAlignment="Center" HorizontalAlignment="Center"
+        />
+
+        <Label x:Name="lblTheme" Content="Thema: " HorizontalAlignment="Left" Margin="304,173,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
+        <Label x:Name="lblActiveTheme" Content="Blauw" HorizontalAlignment="Left" Margin="376,173,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="190" Margin="304,204,0,0" VerticalAlignment="Top" Width="190" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+            <Image x:Name="imgTheme" Source="Resources/memo.png"></Image>
+        </ScrollViewer>
+        <Button x:Name="btnLeft" Content="3" Margin="250,268,476.4,109" Click="BtnLeft_Click" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
+        <Button x:Name="btnRight" Content="4" Margin="498,268,228.4,109" Click="BtnRight_Click"  Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
+
     </Grid>
 </Page>
