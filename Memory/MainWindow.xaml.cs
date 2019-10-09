@@ -22,13 +22,11 @@ namespace Memory
     {
         public MainWindow()
         {
-            InitializeComponent();
-        }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            instellingen ins = new instellingen();
-            this.Content = ins;
+            InitializeComponent();
+            // Manually alter window height and width
+            this.SizeToContent = SizeToContent.Manual;
+            frmMainContent.Source = new Uri("WelkomPage.xaml", UriKind.Relative); // initialize the beginner frame with the "WelkomPage" view
         }
     }
 }

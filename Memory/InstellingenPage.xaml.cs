@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Memory
 {
     /// <summary>
-    /// Interaction logic for instellingen.xaml
+    /// Interaction logic for InstellingenPage.xaml
     /// </summary>
-    public partial class instellingen : Page
+    public partial class InstellingenPage : Page
     {
-        public instellingen()
+        public InstellingenPage()
         {
             InitializeComponent();
         }
