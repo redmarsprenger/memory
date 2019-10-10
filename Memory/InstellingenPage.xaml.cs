@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Memory.Properties;
 
 namespace Memory
 {
@@ -32,9 +33,14 @@ namespace Memory
             "Rood",
             "Geel",
         };
+        ImageSourceConverter converter = new ImageSourceConverter();
         public InstellingenPage()
         {
             InitializeComponent();
+            ToggleSwitchMusic.IsChecked = (bool)Settings.Default["Music"];
+            ToggleSwitchSound.IsChecked = (bool)Settings.Default["Sound"];
+            lblActiveTheme.Content = (string)Settings.Default["ThemeName"];
+            imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
         }
         private void BtnTerug_Click(object sender, RoutedEventArgs e)
         {
@@ -48,6 +54,9 @@ namespace Memory
             string nextElement = GetPreviousElement(theme, currentIndex);
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
             lblActiveTheme.Content = themeNames[GetPreviousIndex(theme, currentIndex)];
+            Settings.Default["ThemeName"] = lblActiveTheme.Content;
+            Settings.Default["Theme"] = imgTheme.Source;
+            Settings.Default.Save();
         }
 
         private void BtnRight_Click(object sender, RoutedEventArgs e)
@@ -56,6 +65,9 @@ namespace Memory
             string nextElement = GetNextElement(theme, currentIndex);
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
             lblActiveTheme.Content = themeNames[GetNextElementIndex(theme, currentIndex)];
+            Settings.Default["ThemeName"] = lblActiveTheme.Content;
+            Settings.Default["Theme"] = nextElement;
+            Settings.Default.Save();
         }
 
         public string GetNextElement(string[] strArray, int index)
@@ -112,6 +124,32 @@ namespace Memory
                 index--;
 
             return index;
+        }
+
+        private void ToggleSwitchMusic_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)Settings.Default["Music"])
+            {
+                Settings.Default["Music"] = false;
+            }
+            else
+            {
+                Settings.Default["Music"] = true;
+            }
+            Settings.Default.Save();
+        }
+
+        private void ToggleSwitchSound_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)Settings.Default["Sound"])
+            {
+                Settings.Default["Sound"] = false;
+            }
+            else
+            {
+                Settings.Default["Sound"] = true;
+            }
+            Settings.Default.Save();
         }
     }
 }
