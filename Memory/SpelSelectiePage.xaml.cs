@@ -38,5 +38,24 @@ namespace Memory
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
         }
+        private void Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Checkbox.IsChecked == true)
+            {
+                Textboxspeler2.IsEnabled = true;
+            }
+          
+        }
+
+        private void Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (Checkbox.IsChecked == false)
+            {
+                Textboxspeler2.IsEnabled = false;
+            }
+
+        }
     }
+
 }
+
