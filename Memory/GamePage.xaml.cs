@@ -16,20 +16,20 @@ using System.Windows.Shapes;
 namespace Memory
 {
     /// <summary>
-    /// Interaction logic for HighScorePage.xaml
+    /// Interaction logic for GamePage.xaml
     /// </summary>
-    public partial class HighScorePage : Page
+    public partial class GamePage : Page
     {
-        public HighScorePage()
+        public GamePage()
         {
             InitializeComponent();
         }
 
-        private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
+        private void pauzebtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("PauzePage.xaml", UriKind.Relative));
         }
     }
 }

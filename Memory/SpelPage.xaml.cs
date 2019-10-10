@@ -16,34 +16,35 @@ using System.Windows.Shapes;
 namespace Memory
 {
     /// <summary>
-    /// Interaction logic for WelkomPage.xaml
+    /// Interaction logic for SpelPage.xaml
     /// </summary>
-    public partial class WelkomPage : Page
+    public partial class SpelPage : Page
     {
-        public WelkomPage()
+        public SpelPage()
         {
             InitializeComponent();
         }
 
-        private void Instellingenbtn_Click(object sender, RoutedEventArgs e)
+        private void SpelSelectiebtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("InstellingenPage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("SpelSelectiePage.xaml", UriKind.Relative));
         }
 
-        private void Startbtn_Click(object sender, RoutedEventArgs e)
+        private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
         }
 
-        private void Highscorebtn_Click(object sender, RoutedEventArgs e)
+        // this is the button to select a gamefile so you can replay old games THIS IS STILL WIP furthermore this brings you for now to the GamePage
+        private void SpelSelectFolderBtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("HighScorePage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
         }
     }
 }

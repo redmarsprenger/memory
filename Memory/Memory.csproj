@@ -37,7 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,18 +55,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HighScorePage.xaml.cs">
       <DependentUpon>HighScorePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="InstellingenPage.xaml.cs">
       <DependentUpon>InstellingenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SpelKeuzePage.xaml.cs">
-      <DependentUpon>SpelKeuzePage.xaml</DependentUpon>
+    <Compile Include="PauzePage.xaml.cs">
+      <DependentUpon>PauzePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpelPage.xaml.cs">
+      <DependentUpon>SpelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpelSelectiePage.xaml.cs">
+      <DependentUpon>SpelSelectiePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WelkomPage.xaml.cs">
       <DependentUpon>WelkomPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HighScorePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -88,7 +100,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SpelKeuzePage.xaml">
+    <Page Include="PauzePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpelSelectiePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,14 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\memo.png" />
-    <Resource Include="Resources\memo2.png" />
-    <Resource Include="Resources\memo3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
