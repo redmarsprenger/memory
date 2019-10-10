@@ -64,8 +64,8 @@
     <Compile Include="InstellingenPage.xaml.cs">
       <DependentUpon>InstellingenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PauzePage.xaml.cs">
-      <DependentUpon>PauzePage.xaml</DependentUpon>
+    <Compile Include="pausepage.xaml.cs">
+      <DependentUpon>pausepage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpelPage.xaml.cs">
       <DependentUpon>SpelPage.xaml</DependentUpon>
@@ -100,9 +100,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PauzePage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="pausepage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="SpelPage.xaml">
       <SubType>Designer</SubType>
