@@ -29,7 +29,7 @@ namespace Memory
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("PauzePage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("pausepage.xaml", UriKind.Relative));
         }
     }
 }
