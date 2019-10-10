@@ -38,18 +38,18 @@ namespace Memory
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
         }
-        private void Checkbox_Checked(object sender, RoutedEventArgs e)
+
+        private void ToggleSwitchSpeler_Checked(object sender, RoutedEventArgs e)
         {
-            if (Checkbox.IsChecked == true)
+            if (ToggleSwitchSpeler.IsChecked == true)
             {
                 Textboxspeler2.IsEnabled = true;
             }
-          
         }
 
-        private void Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        private void ToggleSwitchSpeler_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (Checkbox.IsChecked == false)
+            if (ToggleSwitchSpeler.IsChecked == false)
             {
                 Textboxspeler2.IsEnabled = false;
             }

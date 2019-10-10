@@ -34,6 +34,8 @@ namespace Memory
             Highscores = new List<Highscore>();
             //mock data
             Highscores.Add(new Highscore("Freek", 7, DateTime.Now));
+            Highscores.Add(new Highscore("Freek", 7, DateTime.Now));
+            Highscores.Add(new Highscore("Freek", 7, DateTime.Now));
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = Highscores;
         }

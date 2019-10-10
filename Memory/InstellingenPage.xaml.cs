@@ -27,21 +27,26 @@ namespace Memory
             "pack://application:,,,/Memory;component/Resources/memo2.png",
             "pack://application:,,,/Memory;component/Resources/memo3.png",
         };
+
         string[] themeNames = new string[]
         {
             "Blauw",
             "Rood",
             "Geel",
         };
+
         ImageSourceConverter converter = new ImageSourceConverter();
+
         public InstellingenPage()
         {
             InitializeComponent();
+            //Laad alle settings in vanuit de opgeslagen settings.
             ToggleSwitchMusic.IsChecked = (bool)Settings.Default["Music"];
             ToggleSwitchSound.IsChecked = (bool)Settings.Default["Sound"];
             lblActiveTheme.Content = (string)Settings.Default["ThemeName"];
             imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
         }
+
         private void BtnTerug_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
@@ -52,25 +57,32 @@ namespace Memory
         {
             int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
             string nextElement = GetPreviousElement(theme, currentIndex);
+
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
             lblActiveTheme.Content = themeNames[GetPreviousIndex(theme, currentIndex)];
-            Settings.Default["ThemeName"] = lblActiveTheme.Content;
-            Settings.Default["Theme"] = imgTheme.Source;
-            Settings.Default.Save();
+
+            Savetheme(lblActiveTheme.Content, imgTheme.Source.ToString());
         }
 
         private void BtnRight_Click(object sender, RoutedEventArgs e)
         {
             int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
             string nextElement = GetNextElement(theme, currentIndex);
+
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
-            lblActiveTheme.Content = themeNames[GetNextElementIndex(theme, currentIndex)];
-            Settings.Default["ThemeName"] = lblActiveTheme.Content;
-            Settings.Default["Theme"] = nextElement;
+            lblActiveTheme.Content = themeNames[GetNextIndex(theme, currentIndex)];
+
+            Savetheme(lblActiveTheme.Content, imgTheme.Source.ToString());
+        }
+
+        private void Savetheme(object ThemeName, string theme)
+        {
+            Settings.Default["ThemeName"] = ThemeName;
+            Settings.Default["Theme"] = theme;
             Settings.Default.Save();
         }
 
-        public string GetNextElement(string[] strArray, int index)
+        private string GetNextElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
                 throw new Exception("Invalid index");
@@ -84,7 +96,7 @@ namespace Memory
             return strArray[index];
         }
 
-        public string GetPreviousElement(string[] strArray, int index)
+        private string GetPreviousElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
                 throw new Exception("Invalid index");
@@ -98,7 +110,7 @@ namespace Memory
             return strArray[index];
         }
 
-        public int GetNextElementIndex(string[] strArray, int index)
+        private int GetNextIndex(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
                 throw new Exception("Invalid index");
@@ -112,7 +124,7 @@ namespace Memory
             return index;
         }
 
-        public int GetPreviousIndex(string[] strArray, int index)
+        private int GetPreviousIndex(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
                 throw new Exception("Invalid index");
@@ -128,28 +140,30 @@ namespace Memory
 
         private void ToggleSwitchMusic_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)Settings.Default["Music"])
-            {
-                Settings.Default["Music"] = false;
-            }
-            else
-            {
-                Settings.Default["Music"] = true;
-            }
-            Settings.Default.Save();
+            SaveSettingsBool("Music");
         }
 
         private void ToggleSwitchSound_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)Settings.Default["Sound"])
+            SaveSettingsBool("Sound");
+        }
+
+        private void SaveSettingsBool(string setting)
+        {
+            if ((bool)Settings.Default[setting])
             {
-                Settings.Default["Sound"] = false;
+                Settings.Default[setting] = false;
             }
             else
             {
-                Settings.Default["Sound"] = true;
+                Settings.Default[setting] = true;
             }
             Settings.Default.Save();
+        }
+
+        private void ToggleSwitchMusic_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
