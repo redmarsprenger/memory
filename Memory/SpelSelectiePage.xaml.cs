@@ -16,34 +16,27 @@ using System.Windows.Shapes;
 namespace Memory
 {
     /// <summary>
-    /// Interaction logic for WelkomPage.xaml
+    /// Interaction logic for SpelSelectiePage.xaml
     /// </summary>
-    public partial class WelkomPage : Page
+    public partial class SpelSelectiePage : Page
     {
-        public WelkomPage()
+        public SpelSelectiePage()
         {
             InitializeComponent();
         }
 
-        private void Instellingenbtn_Click(object sender, RoutedEventArgs e)
-        {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("InstellingenPage.xaml", UriKind.Relative));
-        }
-
-        private void Startbtn_Click(object sender, RoutedEventArgs e)
+        private void BacktoSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
         }
 
-        private void Highscorebtn_Click(object sender, RoutedEventArgs e)
+        private void BeginSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("HighScorePage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
         }
     }
 }

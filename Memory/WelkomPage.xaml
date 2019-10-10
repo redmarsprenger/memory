@@ -12,9 +12,9 @@
         <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
         <Button x:Name="Instellingenbtn" Content="Instellingen" Margin="32,31,652.4,347" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Click="Instellingenbtn_Click" Background="White"/>
         <!--  here is the button that will deliver you to the spelwindow. it makes uses of the style roundcorner  -->
-        <Button x:Name="Startbtn" Content="Start" Margin="317,154,306,205.6" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Startbtn_Click"/>
+        <Button x:Name="Startbtn" Content="Start" Margin="317,154,306,205.6" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Startbtn_Click" Background="White"/>
         <!--  here is the button that will deliver you to the highscorewindow. it makes uses of the style roundcorner  -->
-        <Button x:Name="Highscorebtn" Content="HighScore" Margin="317,285,306,74.6" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Highscorebtn_Click"/>
+        <Button x:Name="Highscorebtn" Content="HighScore" Margin="317,285,306,74.6" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Highscorebtn_Click" Background="White"/>
         <!--  here is the textbox thats a little bitch needs reworking so it wont popup blue when focused on  -->
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="242,55,0,363" TextWrapping="Wrap" Text="Welkom to memory:" VerticalAlignment="Center" Width="300" FontFamily="Calibri" FontSize="16" TextAlignment="Center" BorderThickness="1.5" Background="White" Focusable="False" BorderBrush="#FF8F9093" SelectionBrush="{x:Null}"/>
 

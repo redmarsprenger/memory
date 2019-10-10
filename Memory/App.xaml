@@ -4,16 +4,18 @@
              xmlns:local="clr-namespace:Memory"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--down here are two styles created for the use for a finer kind of button so that it while be more round like then square-->
+        <!--down here are two styles created for the use for a finer kind of button so that it while be more round like then square-->        
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <!-- the target type will tell that the only thing able to use this type has to be a button-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="grid">
-                            <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
                                 <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center">
                                 </ContentPresenter>
@@ -24,6 +26,7 @@
             </Setter>
         </Style>
         <Style x:Key="roundercorners" TargetType="{x:Type Button}">
+            <!-- the target type will tell that the only thing able to use this type has to be a button-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="5"/>
@@ -31,7 +34,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="grids">
-                            <Border x:Name="borderd" CornerRadius="15" BorderBrush="Black" BorderThickness="2">
+                            <Border x:Name="borderd" Background="{TemplateBinding Background}" CornerRadius="15" BorderBrush="Black" BorderThickness="2">
                                 <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center">
                                 </ContentPresenter>

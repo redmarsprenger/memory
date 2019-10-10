@@ -15,35 +15,34 @@ using System.Windows.Shapes;
 
 namespace Memory
 {
-    /// <summary>
-    /// Interaction logic for WelkomPage.xaml
-    /// </summary>
-    public partial class WelkomPage : Page
+    public partial class pausepage : Page
     {
-        public WelkomPage()
+        public pausepage()
         {
             InitializeComponent();
+
+        }
+        
+        // This is the button to Resume your game with, THIS IS STILL WIP furthermore this will bring you back to the GamePage//
+        private void Hervatbtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("gamepage.xaml", UriKind.Relative));
         }
 
-        private void Instellingenbtn_Click(object sender, RoutedEventArgs e)
+        // this is the button to save the game, THIS IS STILL WIP furthermore this will bring you back to the Welkompage
+        private void Opslaanbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("InstellingenPage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("Welkompage.xaml", UriKind.Relative));
         }
 
-        private void Startbtn_Click(object sender, RoutedEventArgs e)
+        // This is the button to exit the game with, THIS IS STILL WIP furthermore this will bring you back to the WelkomPage//
+        private void Quitbtn_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
-        }
-
-        private void Highscorebtn_Click(object sender, RoutedEventArgs e)
-        {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("HighScorePage.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("Welkompage.xaml", UriKind.Relative));
         }
     }
 }

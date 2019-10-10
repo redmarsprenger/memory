@@ -8,8 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HighScorePage">
 
-    <Grid Background="White" Margin="0,0,0,-0.4" Width="774.4" Height="441">
-        <Button x:Name="btnTerug" Content="Terug" Margin="32,31,652.8,347" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Background="White" Click="BtnTerug_Click" />
+<Grid Background="White" Width="775" Height="441">
+        <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
+        <Button x:Name="BacktoStartbtn" Content="Back" Margin="32,31,652.4,347" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15"  Background="White" Click="BacktoStartbtn_Click"/>
+        
         <!--The table that shows the submitted player scores and names-->
         <DataGrid Name="HighscoreTable" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" SelectionMode="Extended" SelectionUnit="FullRow" AlternatingRowBackground="Gainsboro"  AlternationCount="2" FontFamily="Calibri" FontWeight="Bold" >
             <!--<DataGrid.Columns>
@@ -19,5 +21,6 @@
             </DataGrid.Columns>-->
         </DataGrid>
         <TextBlock HorizontalAlignment="Center" Margin="0,60,0,0" TextWrapping="Wrap" Text="Highscores" VerticalAlignment="Top" FontFamily="Calibri" FontSize="36" FontWeight="Bold"/>
+
     </Grid>
 </Page>

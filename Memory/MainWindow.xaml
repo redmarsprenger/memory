@@ -12,7 +12,7 @@
             <Frame Name="frmMainContent" Height="410"
          DataContext="MainwindowMemory"
          Source="{Binding}"
-         NavigationUIVisibility="Hidden" Margin="10,0,9.6,0">
+         NavigationUIVisibility="Hidden" Margin="10,0,9.6,0" Width="775">
             </Frame>
 
         </StackPanel>
