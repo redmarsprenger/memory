@@ -197,11 +197,11 @@
 
         <ToggleButton x:Name="ToggleSwitchMusic" FontFamily="Sergio UI" FontSize="16"
               Style="{DynamicResource ToggleSwitchTopStyle}"
-              IsChecked="False" Margin="449,83,281.4,329" VerticalAlignment="Center" HorizontalAlignment="Center"
+              Margin="449,83,281.4,329" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchMusic_Click"
         />
         <ToggleButton x:Name="ToggleSwitchSound" FontFamily="Sergio UI" FontSize="16"
-                      Style="{DynamicResource ToggleSwitchTopStyle}"
-                      IsChecked="False" Margin="449,126,281.4,286" VerticalAlignment="Center" HorizontalAlignment="Center"
+              Style="{DynamicResource ToggleSwitchTopStyle}"
+              Margin="449,126,281.4,286" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchSound_Click"
         />
 
         <Label x:Name="lblTheme" Content="Thema: " HorizontalAlignment="Left" Margin="304,173,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Memory.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,20 @@ namespace Memory
     /// </summary>
     public partial class HighScorePage : Page
     {
+        /// <summary>
+        /// List of Highscore objects
+        /// </summary>
+        public List<Highscore> Highscores;
+
         public HighScorePage()
         {
             InitializeComponent();
+            //creates the typed List()
+            Highscores = new List<Highscore>();
+            //mock data
+            Highscores.Add(new Highscore("Freek", 7, DateTime.Now));
+            //Binds the data to the table on the page
+            HighscoreTable.ItemsSource = Highscores;
         }
 
         private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
