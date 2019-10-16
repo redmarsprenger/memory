@@ -205,5 +205,16 @@
     <Resource Include="Resources\themes\Cards\Background.png" />
     <Resource Include="Resources\themes\Cards\back_cards-07.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons memory\achterkant.png" />
+    <Resource Include="icons memory\baseball.png" />
+    <Resource Include="icons memory\basketball.png" />
+    <Resource Include="icons memory\bowling.png" />
+    <Resource Include="icons memory\football.png" />
+    <Resource Include="icons memory\hoogspringen.png" />
+    <Resource Include="icons memory\roeien.png" />
+    <Resource Include="icons memory\rugby.png" />
+    <Resource Include="icons memory\tennis.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,21 +15,49 @@ using System.Windows.Shapes;
 
 namespace Memory
 {
-    /// <summary>
-    /// Interaction logic for GamePage.xaml
-    /// </summary>
     public partial class GamePage : Page
     {
+        private const int nr_cols = 4;
+        private const int nr_rows = 4;
+        MemoryGrid grid;
+
         public GamePage()
         {
             InitializeComponent();
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows);
+            
+        } 
+        
+    }
+
+    public class MemoryGrid
+    {
+        private Grid grid;
+
+        public MemoryGrid(Grid grid, int cols, int rows)
+        {
+            this.grid = grid;
+            InitializeGameGrid(cols, rows);
         }
 
-        private void pauzebtn_Click(object sender, RoutedEventArgs e)
+        private void InitializeGameGrid(int cols, int rows)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("pausepage.xaml", UriKind.Relative));
+            for (int i = 0; i < rows; i++)
+            {
+                grid.RowDefinitions.Add(new RowDefinition());
+            }
+            for (int i = 0; i < cols; i++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
         }
+
     }
 }
+
+
+
+
+    
+
+
