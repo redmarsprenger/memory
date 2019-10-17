@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Highscore.cs" />
+    <Compile Include="Classes\HighscoreList.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -215,6 +216,9 @@
     <Resource Include="icons memory\roeien.png" />
     <Resource Include="icons memory\rugby.png" />
     <Resource Include="icons memory\tennis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Saves\highscorelist.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
