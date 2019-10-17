@@ -23,16 +23,14 @@ namespace Memory
     {
         string[] theme = new string[]
         {
-            "pack://application:,,,/Memory;component/Resources/memo.png",
-            "pack://application:,,,/Memory;component/Resources/memo2.png",
-            "pack://application:,,,/Memory;component/Resources/memo3.png",
+            "pack://application:,,,/Memory;component/Resources/themes/Cards/achterkant.png",
+            "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png",
         };
 
         string[] themeNames = new string[]
         {
-            "Blauw",
-            "Rood",
-            "Geel",
+            "Cards",
+            "Sport",
         };
 
         ImageSourceConverter converter = new ImageSourceConverter();
