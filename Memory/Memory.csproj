@@ -207,14 +207,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons memory\achterkant.png" />
-    <Resource Include="icons memory\baseball.png" />
-    <Resource Include="icons memory\basketball.png" />
-    <Resource Include="icons memory\bowling.png" />
-    <Resource Include="icons memory\football.png" />
-    <Resource Include="icons memory\hoogspringen.png" />
-    <Resource Include="icons memory\roeien.png" />
-    <Resource Include="icons memory\rugby.png" />
-    <Resource Include="icons memory\tennis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons memory\1.png" />
+    <Resource Include="icons memory\2.png" />
+    <Resource Include="icons memory\3.png" />
+    <Resource Include="icons memory\4.png" />
+    <Resource Include="icons memory\5.png" />
+    <Resource Include="icons memory\6.png" />
+    <Resource Include="icons memory\7.png" />
+    <Resource Include="icons memory\8.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

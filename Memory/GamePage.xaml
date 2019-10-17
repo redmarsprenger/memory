@@ -7,15 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePage">
+    <Grid>
+    <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
+    <Button x:Name="pauzebtn" Content="Pauze" Margin="659,10,10,335.6" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15"  Background="{x:Null}" Click="pauzebtn_Click" />
 
-    
-       
-        <!--memoryspel grid-->
-<Grid x:Name="GameGrid" >
-       
-</Grid>
 
-    
+    <!--memoryspel grid-->
+    <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
+    </Grid>
+
 
 
 </Page>
