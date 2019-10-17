@@ -22,6 +22,9 @@ namespace Memory.Classes
         private Grid grid;
         private int rows;
         private int cols;
+        private int cardsOpen;
+        private Image firstCard;
+        private Image secondCard;
 
         public MemoryGrid(Grid grid, int cols, int rows)
         {
@@ -61,6 +64,7 @@ namespace Memory.Classes
                     Image backgroundimage = new Image();
                     backgroundimage.Source = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
                     backgroundimage.Tag = images.First();
+                    backgroundimage.DataContext = backgroundimage.Source;
                     images.RemoveAt(0);
                     backgroundimage.MouseDown += new MouseButtonEventHandler(cardclick);
                     Grid.SetColumn(backgroundimage, column);
@@ -74,7 +78,33 @@ namespace Memory.Classes
         {
             Image card = (Image)sender;
             ImageSource front = (ImageSource)card.Tag;
+            ImageSource back = (ImageSource)card.DataContext;
+
+            if (cardsOpen == 2)
+            {
+                if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
+                {
+                    firstCard.Source = back;
+                    secondCard.Source = back;
+                }
+                firstCard = null;
+                secondCard = null;
+                cardsOpen = 0;
+            }
+
+            if (firstCard == secondCard)
+            {
+                firstCard = card;
+            }
+            else
+            {
+                secondCard = card;
+            }
+
             card.Source = front;
+            cardsOpen++;
+
+
         }
 
         private void InitializeGameGrid(int cols, int rows)
