@@ -17,7 +17,7 @@ namespace Memory.Classes
         private List<Highscore> Highscores;
         private BinaryFormatter formatter;
 
-        private const string DATA_FILENAME = "../Saves/highscorelist.txt";
+        private const string DATA_FILENAME = "highscorelist.dat";
 
         public static HighscoreList Instance()
         {

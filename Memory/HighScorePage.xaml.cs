@@ -33,15 +33,15 @@ namespace Memory
         {
             InitializeComponent();
             //mock data
-            highscoreList.AddHighscore(new Highscore("Johan", 24, DateTime.Now));
-            highscoreList.AddHighscore(new Highscore("Freek", 7, DateTime.Now));
-            highscoreList.AddHighscore(new Highscore("Anouk", 55, DateTime.Now));
-            highscoreList.AddHighscore(new Highscore("Emiel", 65, DateTime.Now));
-            highscoreList.AddHighscore(new Highscore("Mirte", 33, DateTime.Now));
+            //highscoreList.AddHighscore(new Highscore("Johan", 24, DateTime.Now));
+            //highscoreList.AddHighscore(new Highscore("Freek", 7, DateTime.Now));
+            //highscoreList.AddHighscore(new Highscore("Anouk", 55, DateTime.Now));
+            //highscoreList.AddHighscore(new Highscore("Emiel", 65, DateTime.Now));
+            //highscoreList.AddHighscore(new Highscore("Mirte", 33, DateTime.Now));
 
-            highscoreList.Save();
+            //highscoreList.Save();
 
-            //highscoreList.Load();
+            highscoreList.Load();
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = highscoreList.GetList();
         }
