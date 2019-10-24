@@ -7,13 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450" ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <!-- here it is announced that the starting "frame" is the page written down there.-->
-        <StackPanel>
-            <Frame Name="frmMainContent" Height="410"
+        <StackPanel Grid.ColumnSpan="2">
+            <Frame x:Name="frmMainContent" Height="410"
          DataContext="MainwindowMemory"
          Source="{Binding}"
-         NavigationUIVisibility="Hidden" Margin="10,0,9.6,0" Width="775">
-            </Frame>
+         NavigationUIVisibility="Hidden" Margin="10,0,9,0"/>
 
         </StackPanel>
     </Grid>

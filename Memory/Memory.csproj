@@ -228,7 +228,9 @@
     <Resource Include="icons memory\7.png" />
     <Resource Include="icons memory\8.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Music\background_music.wav" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\themes\Sport\1.png" />
     <Resource Include="Resources\themes\Sport\2.png" />
