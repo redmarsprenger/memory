@@ -6,14 +6,12 @@
       xmlns:local="clr-namespace:Memory"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="pausepage">
+      Title="pausepage" Width="775" Height="410" MinWidth="775" MinHeight="410">
+    <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
 
-
-    <Grid Background="White" Width="774.4" Height="441">
-        
         <Label x:Name="pauselabel" Content="Spel gepauzeerd" Margin="259,57.4,0,0" FontFamily="Calibri" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" UseLayoutRounding="False" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Height="53.947" Width="254.22"/>
-        <Button x:Name="Hervatbtn" Content="Spel hervatten" Margin="312,140,311.4,220" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Hervatbtn_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="Opslaanbtn" Content="Spel opslaan" Margin="312,226,311.4,134" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Opslaanbtn_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="Quitbtn" Content="Spel verlaten" Margin="312,312,311.4,48" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Quitbtn_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="Hervatbtn" Content="Spel hervatten" Margin="312,140,311,206" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Hervatbtn_Click" Height="64"/>
+        <Button x:Name="Opslaanbtn" Content="Spel opslaan" Margin="312,226,311,120" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Opslaanbtn_Click" Height="64"/>
+        <Button x:Name="Quitbtn" Content="Spel verlaten" Margin="312,312,311,34" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Click="Quitbtn_Click" Height="64"/>
     </Grid>
 </Page>

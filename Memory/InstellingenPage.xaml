@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Memory"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="InstellingenPage">
+      Title="InstellingenPage" Width="775" Height="410" MinWidth="775" MinHeight="410">
 
     <Page.Resources>
 
@@ -187,9 +187,9 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="White" Width="774.4" Height="441">
+    <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
 
-        <Button x:Name="btnTerug" Content="Terug" Margin="32,31,652.4,347" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Background="White" Click="BtnTerug_Click" />
+        <Button x:Name="btnTerug" Content="Terug" Margin="32,31,637,315" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Background="White" Click="BtnTerug_Click" />
 
 
         <Label x:Name="lblMusic" Content="Muziek" HorizontalAlignment="Left" Margin="304,83,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
@@ -197,11 +197,11 @@
 
         <ToggleButton x:Name="ToggleSwitchMusic" FontFamily="Sergio UI" FontSize="16"
               Style="{DynamicResource ToggleSwitchTopStyle}"
-              Margin="449,83,281.4,329" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchMusic_Click"
+              Margin="450,83,281,299" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchMusic_Click" Height="28"
         />
         <ToggleButton x:Name="ToggleSwitchSound" FontFamily="Sergio UI" FontSize="16"
               Style="{DynamicResource ToggleSwitchTopStyle}"
-              Margin="449,126,281.4,286" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchSound_Click"
+              Margin="450,126,281,256" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ToggleSwitchSound_Click" Height="28"
         />
 
         <Label x:Name="lblTheme" Content="Thema: " HorizontalAlignment="Left" Margin="304,173,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="15"/>
@@ -209,8 +209,8 @@
         <ScrollViewer HorizontalAlignment="Left" Height="190" Margin="304,204,0,0" VerticalAlignment="Top" Width="190" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
             <Image x:Name="imgTheme"></Image>
         </ScrollViewer>
-        <Button x:Name="btnLeft" Content="3" Margin="250,268,476.4,109" Click="BtnLeft_Click" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
-        <Button x:Name="btnRight" Content="4" Margin="498,268,228.4,109" Click="BtnRight_Click"  Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
+        <Button x:Name="btnLeft" Content="3" Margin="250,268,476,78" Click="BtnLeft_Click" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
+        <Button x:Name="btnRight" Content="4" Margin="498,268,228,78" Click="BtnRight_Click"  Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Marlett" FontSize="36" Background="White"/>
 
     </Grid>
 </Page>

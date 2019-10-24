@@ -1,0 +1,12 @@
+﻿<Page x:Class="Memory.BlancPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Memory"
+      mc:Ignorable="d" 
+      d:DesignHeight="410" d:DesignWidth="775"
+      Title="BlancPage" Width="775" Height="410" MinWidth="775" MinHeight="410">
+
+
+</Page>
