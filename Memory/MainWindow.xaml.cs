@@ -29,7 +29,14 @@ namespace Memory
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            if ((string)Settings.Default["ThemeName"] == "blue")
+            {
+                Settings.Default["ThemeName"] = "Sport";
+                Settings.Default["Theme"] = "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png";
+                Settings.Default.Save();
+            }
+
             string filename = "../../Resources/music/background_music.wav";
             string path = System.IO.Path.GetFullPath(filename);
             string url = new Uri(path).AbsoluteUri;
