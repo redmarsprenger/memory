@@ -28,15 +28,23 @@ namespace Memory
         private void BacktoSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
+            var SpelPage = new SpelPage();
+            NavigationService.Navigate(SpelPage);
         }
 
         private void BeginSpelbtn_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+            if (!Textboxspeler2.IsEnabled)
+            {
+                var GamePage = new GamePage(textboxspeler1.Text);
+                NavigationService.Navigate(GamePage);
+            }
+            else
+            {
+                var GamePage = new GamePage(textboxspeler1.Text, Textboxspeler2.Text);
+                NavigationService.Navigate(GamePage);
+            }
+
         }
 
         private void ToggleSwitchSpeler_Checked(object sender, RoutedEventArgs e)

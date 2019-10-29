@@ -46,7 +46,7 @@ namespace Memory
         // this is the button to select a gamefile so you can replay old games THIS IS STILL WIP furthermore this brings you for now to the GamePage
         private void SpelSelectFolderBtn_Click(object sender, RoutedEventArgs e)
         {
-            var gamePage = new GamePage(this);
+            var gamePage = new GamePage(this, "F");
             NavigationService.Navigate(gamePage);
         }
     }

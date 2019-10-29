@@ -30,23 +30,49 @@ namespace Memory.Classes
         private Image firstCard;
         private Image secondCard;
         private List<ImageSource> images = new List<ImageSource>();
+        private List<Image> bgImages = new List<Image>();
+        private string currentPlayer = "";
+        private string player1 = "";
+        private string player2 = "";
+        private int player1Score = 0;
+        private int player2Score = 0;
+        private GamePage gamePage;
 
-        public MemoryGrid(Grid grid, int cols, int rows)
+        public MemoryGrid(Grid grid, int cols, int rows, string player)
         {
             this.rows = rows;
             this.cols = cols;
             this.grid = grid;
+            this.player1 = player;
+            currentPlayer = player1;
             InitializeGameGrid(cols, rows);
             AddImages();
         }
 
-        public MemoryGrid(String savedGrid)
+        // Two player grid
+        public MemoryGrid(Grid grid, int cols, int rows, string player1, string player2, GamePage gamePage)
         {
+            this.rows = rows;
+            this.cols = cols;
+            this.grid = grid;
+            this.player1 = player1;
+            this.player2 = player2;
+            this.gamePage = gamePage;
+            currentPlayer = player1;
+            InitializeGameGrid(cols, rows);
+            AddImages();
+        }
+
+        public MemoryGrid(String savedGrid, string player)
+        {
+            this.player1 = player;
+            currentPlayer = player1;
             StringReader stringReader = new StringReader(savedGrid);
             XmlReader xmlReader = XmlReader.Create(stringReader);
             Grid readerLoadGrid = (Grid)XamlReader.Load(xmlReader);
             this.grid = readerLoadGrid;
         }
+
         public Grid getGrid()
         {
             return grid;
@@ -84,91 +110,13 @@ namespace Memory.Classes
                     backgroundimage.Tag = images[imageNumber];
                     imageNumber++;
                     backgroundimage.DataContext = backgroundimage.Source;
-//                    images.RemoveAt(0);
-                    backgroundimage.MouseDown += new MouseButtonEventHandler(cardclick);
+                    backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
                     Grid.SetColumn(backgroundimage, column);
                     Grid.SetRow(backgroundimage, row);
                     grid.Children.Add(backgroundimage);
+                    bgImages.Add(backgroundimage);
                 }
             }
-        }
-
-        private void cardclick(object sender, MouseButtonEventArgs e)
-        {
-            Image card = (Image) sender;
-            ImageSource front = (ImageSource) card.Tag;
-            ImageSource back = (ImageSource) card.DataContext;
-
-            if (firstCard != card)
-            {
-                if (cardsOpen == 2)
-                {
-                    if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
-                    {
-                        firstCard.Source = back;
-                        secondCard.Source = back;
-                    }
-                    else
-                    {
-                        firstCard.Source = null;
-                        secondCard.Source = null;
-                    }
-
-                    firstCard = null;
-                    secondCard = null;
-                    cardsOpen = 0;
-                }
-
-                if (firstCard == secondCard)
-                {
-                    firstCard = card;
-                }
-                else
-                {
-                    secondCard = card;
-                }
-
-                card.Source = front;
-                cardsOpen++;
-
-                if (CheckWinner())
-                {
-                    MessageBox.Show("You've won!'");
-                }
-
-                UpdateScore();
-
-                UpdatePlayer();
-            }
-        }
-
-        private void UpdatePlayer()
-        {
-
-        }
-
-        private void UpdateScore()
-        {
-
-        }
-
-        private bool CheckWinner()
-        {
-//            int imagesFlipped = 0;
-//            images.ForEach(delegate (ImageSource img)
-//            {
-//                if (img == null)
-//                {
-//                    imagesFlipped++;
-//                }
-//            });
-//
-//            if (imagesFlipped == (cols * rows - 2))
-//            {
-//                return true;
-//            }
-//
-            return false;
         }
 
         private void InitializeGameGrid(int cols, int rows)
