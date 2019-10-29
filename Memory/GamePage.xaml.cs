@@ -37,6 +37,9 @@ namespace Memory
         private int player1Score;
         private int player2Score;
 
+        private bool singleplayer { get; set; }
+        private HighscoreList highscoreList = HighscoreList.Instance();
+
         public GamePage()
         {
             InitializeComponent();
@@ -46,6 +49,8 @@ namespace Memory
         {
             InitializeComponent();
             this.player1 = Player1;
+
+            this.singleplayer = true;
             txtBeurtNaam.Text = player1;
 
             grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, Player1);
@@ -57,6 +62,7 @@ namespace Memory
             this.player1 = Player1;
             this.player2 = Player2;
 
+            this.singleplayer = false;
             txtBeurtNaam.Text = player1;
             grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, Player1, Player2, this);
 
@@ -184,9 +190,16 @@ namespace Memory
             return winner + " heeft gewonnen!";
         }
 
-        private void UpdateScore()
+        private void UpdateScore(int score, string playername, string timer.text)
         {
+            this.highscoreList.Load();
 
+            //DateTime time = timer.text;
+
+            //this.highscoreList.AddHighscore(new Highscore(playername, score, time));
+
+            this.highscoreList.Save();
+            
         }
 
         private bool CheckWinner()

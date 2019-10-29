@@ -9,16 +9,18 @@
       Title="GamePage" Width="775" Height="410" MinWidth="775" MinHeight="410">
     <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
         <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
-        <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-
-
-        <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
         <Button x:Name="pauzebtn" Content="Pauze" Margin="659,10,10,335.6" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Click="pauzebtn_Click" RenderTransformOrigin="0.501,0.336" Grid.ColumnSpan="2" Background="White"/>
 
 
         <!--memoryspel grid-->
         <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
+        
+        <!--sidebar-->
+        <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
         <TextBlock x:Name="txtBeurtNaam" Text="Speler1" HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        
+        <Label Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtScore" Text="0" HorizontalAlignment="Left" Margin="695,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 
 
