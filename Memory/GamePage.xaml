@@ -21,6 +21,9 @@
         
         <Label Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtScore" Text="0" HorizontalAlignment="Left" Margin="695,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="txtScore_1" Text="Speler1" HorizontalAlignment="Left" Margin="659,137,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <TextBlock x:Name="txtScore_2" Text="Speler1" HorizontalAlignment="Left" Margin="659,170,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
     </Grid>
 
 
