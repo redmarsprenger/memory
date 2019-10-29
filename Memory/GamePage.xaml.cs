@@ -123,20 +123,18 @@ namespace Memory
                     if (!singlePlayer)
                     {
                         currentPlayer = (currentPlayer == player1) ? player2 : player1;
-                        txtScore_1.Text = player1Score.ToString();
-                        txtScore_2.Text = player2Score.ToString();
+
                         UpdatePlayer(currentPlayer);
                     }
-
-                    if (CheckWinner())
-                    {
-                        FlipCards(card, front, back);
-                        MessageBox.Show(GameWinner());
-                    }
                 }
-
                 UpdateScore();
 
+                if (cardsOpen == 2 && CheckWinner())
+                {
+                    FlipCards(card, front, back);
+                    MessageBox.Show(GameWinner());
+                    NavigationService.Navigate(new WelkomPage());
+                }
             }
         }
 
@@ -149,14 +147,6 @@ namespace Memory
             }
             else
             {
-                if (currentPlayer != player1)
-                {
-                    player1Score++;
-                }
-                else
-                {
-                    player2Score++;
-                }
                 foreach (Image img in bgImages)
                 {
                     if (img.Tag != null)
@@ -200,7 +190,7 @@ namespace Memory
             }
         }
 
-        private void UpdateScore(int score, string playername, string timer.text)
+        private void UpdateScore()
         {
             this.highscoreList.Load();
 
@@ -210,6 +200,19 @@ namespace Memory
 
             this.highscoreList.Save();
             
+            if (!singlePlayer && cardsOpen == 2 && firstCard.Tag.ToString() == secondCard.Tag.ToString())
+            {
+                if (currentPlayer != player1)
+                {
+                    player1Score++;
+                }
+                else
+                {
+                    player2Score++;
+                }
+                txtScore_1.Text = player1Score.ToString();
+                txtScore_2.Text = player2Score.ToString();
+            }
         }
 
         private bool CheckWinner()
