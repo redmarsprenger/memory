@@ -38,12 +38,13 @@ namespace Memory.Classes
         private int player2Score = 0;
         private GamePage gamePage;
 
-        public MemoryGrid(Grid grid, int cols, int rows, string player)
+        public MemoryGrid(Grid grid, int cols, int rows, string player, GamePage gamePage)
         {
             this.rows = rows;
             this.cols = cols;
             this.grid = grid;
             this.player1 = player;
+            this.gamePage = gamePage;
             currentPlayer = player1;
             InitializeGameGrid(cols, rows);
             AddImages();
@@ -129,6 +130,11 @@ namespace Memory.Classes
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
+        }
+
+        public List<Image> getBgImages()
+        {
+            return bgImages;
         }
     }
 }

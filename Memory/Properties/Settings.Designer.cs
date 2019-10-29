@@ -61,7 +61,7 @@ namespace Memory.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Blue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sport")]
         public string ThemeName {
             get {
                 return ((string)(this["ThemeName"]));
