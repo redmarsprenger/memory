@@ -19,6 +19,8 @@
         <!--memoryspel grid-->
         <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
         <TextBlock x:Name="txtBeurtNaam" Text="Speler1" HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <TextBlock x:Name="txtScore_1" Text="Speler1" HorizontalAlignment="Left" Margin="659,137,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <TextBlock x:Name="txtScore_2" Text="Speler1" HorizontalAlignment="Left" Margin="659,170,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
     </Grid>
 
 
