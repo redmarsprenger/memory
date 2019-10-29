@@ -32,6 +32,7 @@ namespace Memory
         private void Hervatbtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(gamePage);
+            
 //            NavigationService ns = NavigationService.GetNavigationService(this);
 //            ns.Navigate(gamePage);
         }

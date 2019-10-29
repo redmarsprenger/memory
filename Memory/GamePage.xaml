@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Memory"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GamePage" Width="775" Height="410" MinWidth="775" MinHeight="410">
+      Title="GamePage" Width="775" Height="410" MinWidth="775" MinHeight="410" Loaded="Page_loaded">
     <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
         <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
         <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
@@ -19,6 +19,8 @@
         <!--memoryspel grid-->
         <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
         <TextBlock x:Name="txtBeurtNaam" Text="Speler1" HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <!--  -->
+        <Label x:Name="Timerlabel" Content="0" FontSize="20" FontFamily="calibri" HorizontalAlignment="Left" Margin="690,137,0,0" VerticalAlignment="Top" Foreground="#FFC84B4B"/>
     </Grid>
 
 

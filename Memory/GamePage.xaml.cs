@@ -41,7 +41,39 @@ namespace Memory
         {
             InitializeComponent();
         }
+        // start of the timer code: //
 
+        // announces that the timer is created and what its name is. //
+        DispatcherTimer timer = new DispatcherTimer();
+        // a bool is created so that the timer wont stack. //
+        private bool timerInstance = false;
+
+        // here is the instance Page_load created and on page_loaded the if-else statement is created where it will ask if the timer is already created or not. //
+        public void Page_loaded(object sender, RoutedEventArgs e)
+        {
+            // checks if the starting value is false, and if it is it will indicate how the timer shall be handled.
+            if (timerInstance == false)
+            {
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += TimeTicker;
+                timer.Start();
+                timerInstance = true;
+            }
+            // if the timerinstance is already true it will simply resume the timer.//
+            else
+            {
+                timer.Start();
+            }
+        }
+        // creates the indicator of how much the timer is on. //
+        public int TotalTime = 0;
+        // TimeTickers creates the development of how the value of Totaltime is increased. //
+        public void TimeTicker(object sender, EventArgs e) 
+        {
+            TotalTime++;
+            Timerlabel.Content = TotalTime.ToString();
+        }
+// end of the timer code // 
         public GamePage(string Player1)
         {
             InitializeComponent();
@@ -75,6 +107,10 @@ namespace Memory
         {
             var pausePage = new pausepage(this);
             NavigationService.Navigate(pausePage);
+            // puts a stop on the timer. //
+            timer.Stop();
+
+            
         }
 
         public void UpdatePlayer(string newPlayer)
