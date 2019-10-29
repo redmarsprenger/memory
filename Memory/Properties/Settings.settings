@@ -12,7 +12,7 @@
       <Value Profile="(Default)">pack://application:,,,/Memory;component/Resources/memo.png</Value>
     </Setting>
     <Setting Name="ThemeName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Blue</Value>
+      <Value Profile="(Default)">Sport</Value>
     </Setting>
     <Setting Name="WindowState" Type="System.Windows.WindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
