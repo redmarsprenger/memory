@@ -19,7 +19,7 @@
         <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
         <TextBlock x:Name="txtBeurtNaam" Text="Speler1" HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
 
-        <Label x:Name="Timerlabel" Content="0" FontSize="20" FontFamily="calibri" HorizontalAlignment="Left" Margin="690,137,0,0" VerticalAlignment="Top" Foreground="#FFC84B4B"/>
+        <Label x:Name="Timerlabel" Content="0" FontSize="20" FontFamily="calibri" HorizontalAlignment="Left" Margin="659,194,0,0" VerticalAlignment="Top" Foreground="#00000000"/>
         
         <Label Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtScore" Text="0" HorizontalAlignment="Left" Margin="695,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
