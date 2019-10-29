@@ -190,16 +190,19 @@ namespace Memory
             }
         }
 
-        private void UpdateScore()
+        private void SubmitScore()
         {
-            this.highscoreList.Load();
+            //this.highscoreList.Load();
 
-            //DateTime time = timer.text;
+            ////DateTime time = timer.text;
 
-            //this.highscoreList.AddHighscore(new Highscore(playername, score, time));
+            ////this.highscoreList.AddHighscore(new Highscore(playername, score, time));
 
-            this.highscoreList.Save();
-            
+            //this.highscoreList.Save();
+        }
+
+        private void UpdateScore()
+        {            
             if (!singlePlayer && cardsOpen == 2 && firstCard.Tag.ToString() == secondCard.Tag.ToString())
             {
                 if (currentPlayer != player1)
