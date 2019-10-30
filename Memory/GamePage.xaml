@@ -13,7 +13,7 @@
 
 
         <!--memoryspel grid-->
-        <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
+        <Grid x:Name="GameGrid" Margin="0,0,131,0" MouseDown="card_flip"/>
         
         <!--sidebar-->
         <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>

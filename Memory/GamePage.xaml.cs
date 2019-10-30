@@ -150,6 +150,7 @@ namespace Memory
             
         }
 
+        
         /// <summary>
         /// 
         /// </summary>
@@ -330,6 +331,20 @@ namespace Memory
             return false;
         }
 
+
+        private void card_flip(object sender, MouseButtonEventArgs e)
+        {
+            SoundEffectPlay();
+        }
+
+        private void SoundEffectPlay()
+        {
+            string soundeffect = "../../Resources/music/cardflip.wav";
+            var sound = new System.Media.SoundPlayer(soundeffect);
+            sound.Play();
+        }
+
+      
     }
 }
 

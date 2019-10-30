@@ -230,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Music\background_music.wav" />
+    <Content Include="Resources\Music\cardflip.wav" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\themes\Sport\1.png" />
