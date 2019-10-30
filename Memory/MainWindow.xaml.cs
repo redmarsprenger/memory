@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Memory.Properties;
 using System.IO;
-
+using Memory.Classes;
 
 namespace Memory
 {
@@ -26,9 +26,13 @@ namespace Memory
         public System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
         private object soundLocation;
 
+        private HighscoreList highscoreList = HighscoreList.Instance();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            highscoreList.Load();
 
             if ((string)Settings.Default["ThemeName"] == "blue")
             {
@@ -63,6 +67,7 @@ namespace Memory
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //highscoreList.Save();
             sp.Stop();
         }
     }

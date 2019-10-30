@@ -23,9 +23,9 @@ namespace Memory.Classes
         /// <summary>
         /// Time of the duration of the game
         /// </summary>
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
-        public Highscore(string Name, int Score, DateTime Time)
+        public Highscore(string Name, int Score, string Time)
         {
             this.Name = Name;
             this.Score = Score;

@@ -222,19 +222,21 @@ namespace Memory
             }
             else
             {
-                return "U heeft het spel voltooid met een score van: " + "42";
+                SubmitScore(this.player1, this.player1Score, this.TotalTime);
+
+                return "U heeft het spel voltooid met een score van: " + this.player1Score;
             }
         }
 
-        private void SubmitScore()
+        private void SubmitScore(string playername, int score, int timer)
         {
-            //this.highscoreList.Load();
+            int minutes = timer / 60;
+            int seconds = timer % 60;
 
-            ////DateTime time = timer.text;
+            string time = minutes + " : " + seconds;
 
-            ////this.highscoreList.AddHighscore(new Highscore(playername, score, time));
-
-            //this.highscoreList.Save();
+            highscoreList.AddHighscore(new Highscore(playername, score, time));
+            highscoreList.Save();
         }
 
         private void UpdateScore()
@@ -251,6 +253,11 @@ namespace Memory
                 }
                 txtScore_1.Text = player1Score.ToString();
                 txtScore_2.Text = player2Score.ToString();
+            }
+            else
+            {
+                this.player1Score++;
+                txtScore_1.Text = player1Score.ToString();
             }
         }
 
