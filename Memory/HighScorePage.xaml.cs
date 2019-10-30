@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,9 @@ namespace Memory
         public HighScorePage()
         {
             InitializeComponent();
+
+            //sorts the table with highest score first
+            HighscoreTable.Items.SortDescriptions.Add(new SortDescription("Score", ListSortDirection.Descending));
 
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = highscoreList.GetList();
