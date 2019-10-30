@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -162,6 +163,10 @@ namespace Memory
             txtBeurtNaam.Text = newPlayer;
         }
 
+
+        SoundPlayer FlipSound = new SoundPlayer(@"../../Resources/music/cardflip.wav");
+        SoundPlayer WinSound = new SoundPlayer(@"../../Resources/music/win.wav");
+        SoundPlayer FailSound = new SoundPlayer(@"../../Resources/music/fail.wav");
         /// <summary>
         /// 
         /// </summary>
@@ -175,6 +180,10 @@ namespace Memory
 
             if (firstCard != card)
             {
+                WinSound.Stop();
+                FailSound.Stop();
+                FlipSound.Play();
+                
                 if (cardsOpen == 2)
                 {
                     FlipCards(card, front, back);
@@ -197,7 +206,17 @@ namespace Memory
                     currentPlayer = (currentPlayer == player1) ? player2 : player1;
                     UpdatePlayer(currentPlayer);
                 }
-                UpdateScore();
+                else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
+                {
+                    FlipSound.Stop();
+                    WinSound.Play();
+                }
+                else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
+                {
+                    FlipSound.Stop();
+                    FailSound.Play();
+                }
+                    UpdateScore();
 
                 if (cardsOpen == 2 && CheckWinner())
                 {
@@ -342,20 +361,6 @@ namespace Memory
             return false;
         }
 
-
-        private void card_flip(object sender, MouseButtonEventArgs e)
-        {
-            SoundEffectPlay();
-        }
-
-        private void SoundEffectPlay()
-        {
-            string soundeffect = "../../Resources/music/cardflip.wav";
-            var sound = new System.Media.SoundPlayer(soundeffect);
-            sound.Play();
-        }
-
-      
     }
 }
 

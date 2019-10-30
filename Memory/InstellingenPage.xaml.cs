@@ -57,7 +57,6 @@ namespace Memory
             List<string> themeList = new List<string>();
             List<string> namesList = new List<string>();
 
-//            string baseFolder = "pack://application:,,,//Memory;component//Resources//themes";
             string[] employeeFolders = Directory.GetDirectories(baseFolder);
             string imgName = "achterkant.png";
             foreach (var folderName in employeeFolders)
@@ -152,7 +151,11 @@ namespace Memory
         private string GetNextElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
-                throw new Exception("Invalid index");
+            {
+                Settings.Default["ThemeName"] = "Sport";
+                Settings.Default["Theme"] = "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png";
+                Settings.Default.Save();
+            }
 
             else if (index == strArray.Length - 1)
                 index = 0;
@@ -172,7 +175,11 @@ namespace Memory
         private string GetPreviousElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
-                throw new Exception("Invalid index");
+            {
+                Settings.Default["ThemeName"] = "Sport";
+                Settings.Default["Theme"] = "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png";
+                Settings.Default.Save();
+            }
 
             else if (index == 0)
                 index = strArray.Length - 1;
