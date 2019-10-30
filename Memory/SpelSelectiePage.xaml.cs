@@ -20,11 +20,19 @@ namespace Memory
     /// </summary>
     public partial class SpelSelectiePage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public SpelSelectiePage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BacktoSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
@@ -32,6 +40,11 @@ namespace Memory
             NavigationService.Navigate(SpelPage);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BeginSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             if (!Textboxspeler2.IsEnabled)
@@ -47,6 +60,11 @@ namespace Memory
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchSpeler_Checked(object sender, RoutedEventArgs e)
         {
             if (ToggleSwitchSpeler.IsChecked == true)
@@ -55,6 +73,11 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchSpeler_Unchecked(object sender, RoutedEventArgs e)
         {
             if (ToggleSwitchSpeler.IsChecked == false)

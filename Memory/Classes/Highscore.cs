@@ -25,6 +25,12 @@ namespace Memory.Classes
         /// </summary>
         public string Time { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Name">string of the player name</param>
+        /// <param name="Score">int of the score achieved in the game</param>
+        /// <param name="Time">string of the time it took to finish a game</param>
         public Highscore(string Name, int Score, string Time)
         {
             this.Name = Name;

@@ -230,6 +230,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Music\background_music.wav" />
+    <Content Include="Resources\Music\cardflip.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\themes\Pokemon\1.png" />
+    <Resource Include="Resources\themes\Pokemon\2.png" />
+    <Resource Include="Resources\themes\Pokemon\3.png" />
+    <Resource Include="Resources\themes\Pokemon\4.png" />
+    <Resource Include="Resources\themes\Pokemon\5.png" />
+    <Resource Include="Resources\themes\Pokemon\6.png" />
+    <Resource Include="Resources\themes\Pokemon\7.png" />
+    <Resource Include="Resources\themes\Pokemon\8.png" />
+    <Resource Include="Resources\themes\Pokemon\achterkant.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\themes\Sport\1.png" />

@@ -20,18 +20,31 @@ namespace Memory
     /// </summary>
     public partial class WelkomPage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public WelkomPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Instellingenbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("InstellingenPage.xaml", UriKind.Relative));
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Startbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
@@ -39,6 +52,11 @@ namespace Memory
             ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Highscorebtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//

@@ -21,6 +21,9 @@ namespace Memory
 {
     public partial class BlancPage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public BlancPage()
         {
             InitializeComponent();

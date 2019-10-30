@@ -23,7 +23,7 @@ namespace Memory
 {
     public partial class GamePage : Page
     {
-        MemoryGrid grid;
+        private MemoryGrid grid;
         private const int nr_cols = 4;
         private const int nr_rows = 4;
         private int cardsOpen;
@@ -38,25 +38,29 @@ namespace Memory
         private int player2Score;
         private bool singlePlayer;
 
-
-        private bool singleplayer { get; set; }
+        private bool singleplayer;
         private HighscoreList highscoreList = HighscoreList.Instance();
 
+        private DispatcherTimer timer = new DispatcherTimer();
+        private bool timerInstance;
+        public int TotalTime;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public GamePage()
         {
             InitializeComponent();
         }
-        // start of the timer code: //
 
-        // announces that the timer is created and what its name is. //
-        DispatcherTimer timer = new DispatcherTimer();
-        // a bool is created so that the timer wont stack. //
-        private bool timerInstance = false;
-
-        // here is the instance Page_load created and on page_loaded the if-else statement is created where it will ask if the timer is already created or not. //
+        /// <summary>
+        /// The instance Page_load created and on page_loaded the if-else statement is created where it will ask if the timer is already created or not.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Page_loaded(object sender, RoutedEventArgs e)
         {
-            // checks if the starting value is false, and if it is it will indicate how the timer shall be handled.
+            // if the starting value is false initializes the timer
             if (timerInstance == false)
             {
                 timer.Interval = TimeSpan.FromSeconds(1);
@@ -64,21 +68,28 @@ namespace Memory
                 timer.Start();
                 timerInstance = true;
             }
-            // if the timerinstance is already true it will simply resume the timer.//
-            else
+            else // resume the timer
             {
                 timer.Start();
             }
         }
-        // creates the indicator of how much the timer is on. //
-        public int TotalTime = 0;
-        // TimeTickers creates the development of how the value of Totaltime is increased. //
+
+        /// <summary>
+        /// creates the indicator of how much the timer is on
+        /// TimeTickers creates the development of how the value of Totaltime is increased
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void TimeTicker(object sender, EventArgs e) 
         {
             TotalTime++;
             Timerlabel.Content = TotalTime.ToString();
         }
-// end of the timer code // 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Player1"></param>
         public GamePage(string Player1)
         {
             InitializeComponent();
@@ -91,6 +102,11 @@ namespace Memory
             bgImages = grid.getBgImages();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Player1"></param>
+        /// <param name="Player2"></param>
         public GamePage(string Player1, string Player2)
         {
             InitializeComponent();
@@ -105,6 +121,11 @@ namespace Memory
             bgImages = grid.getBgImages();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spelPage"></param>
+        /// <param name="Player1"></param>
         public GamePage(SpelPage spelPage, string Player1)
         {
             InitializeComponent();
@@ -114,6 +135,11 @@ namespace Memory
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void pauzebtn_Click(object sender, RoutedEventArgs e)
         {
             var pausePage = new pausepage(this);
@@ -124,11 +150,21 @@ namespace Memory
             
         }
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newPlayer"></param>
         public void UpdatePlayer(string newPlayer)
         {
             txtBeurtNaam.Text = newPlayer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void cardclick(object sender, MouseButtonEventArgs e)
         {
             Image card = (Image)sender;
@@ -154,14 +190,10 @@ namespace Memory
 
                 card.Source = front;
                 cardsOpen++;
-                if (cardsOpen == 2)
+                if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
                 {
-                    if (!singlePlayer)
-                    {
-                        currentPlayer = (currentPlayer == player1) ? player2 : player1;
-
-                        UpdatePlayer(currentPlayer);
-                    }
+                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                    UpdatePlayer(currentPlayer);
                 }
                 UpdateScore();
 
@@ -174,6 +206,12 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="card"></param>
+        /// <param name="front"></param>
+        /// <param name="back"></param>
         private void FlipCards(Image card, ImageSource front, ImageSource back)
         {
             if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
@@ -201,6 +239,10 @@ namespace Memory
             secondCard = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private string GameWinner()
         {
             if (!singlePlayer)
@@ -227,8 +269,10 @@ namespace Memory
                 return "U heeft het spel voltooid met een score van: " + this.player1Score;
             }
         }
-
+        
+        
         private void SubmitScore(string playername, int score, int timer)
+
         {
             int minutes = timer / 60;
             int seconds = timer % 60;
@@ -239,11 +283,14 @@ namespace Memory
             highscoreList.Save();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateScore()
         {            
             if (!singlePlayer && cardsOpen == 2 && firstCard.Tag.ToString() == secondCard.Tag.ToString())
             {
-                if (currentPlayer != player1)
+                if (currentPlayer == player1)
                 {
                     player1Score++;
                 }
@@ -261,6 +308,10 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private bool CheckWinner()
         {
             int imagesFlipped = 0;
@@ -282,6 +333,20 @@ namespace Memory
             return false;
         }
 
+
+        private void card_flip(object sender, MouseButtonEventArgs e)
+        {
+            SoundEffectPlay();
+        }
+
+        private void SoundEffectPlay()
+        {
+            string soundeffect = "../../Resources/music/cardflip.wav";
+            var sound = new System.Media.SoundPlayer(soundeffect);
+            sound.Play();
+        }
+
+      
     }
 }
 
