@@ -205,7 +205,17 @@ namespace Memory
                     currentPlayer = (currentPlayer == player1) ? player2 : player1;
                     UpdatePlayer(currentPlayer);
                 }
-                UpdateScore();
+                else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
+                {
+                    FlipSound.Stop();
+                    WinSound.Play();
+                }
+                else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
+                {
+                    FlipSound.Stop();
+                    FailSound.Play();
+                }
+                    UpdateScore();
 
                 if (cardsOpen == 2 && CheckWinner())
                 {
@@ -228,8 +238,6 @@ namespace Memory
             {
                 firstCard.Source = back;
                 secondCard.Source = back;
-                FlipSound.Stop();
-                FailSound.Play();
             }
             else
             {
@@ -240,8 +248,6 @@ namespace Memory
                         if (firstCard.Source.ToString() == img.Tag.ToString())
                         {
                             img.Tag = null;
-                            FlipSound.Stop();
-                            WinSound.Play();
                         }
                     }
                 }
