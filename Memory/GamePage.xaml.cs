@@ -206,6 +206,11 @@ namespace Memory
                 cardsOpen++;
                 if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
                 {
+                    if ((bool)Settings.Default["Sound"])
+                    {
+                        FlipSound.Stop();
+                        FailSound.Play();
+                    }
                     currentPlayer = (currentPlayer == player1) ? player2 : player1;
                     UpdatePlayer(currentPlayer);
                 }
