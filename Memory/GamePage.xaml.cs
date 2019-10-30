@@ -45,6 +45,8 @@ namespace Memory
         private bool timerInstance;
         public int TotalTime;
 
+        private int singlePlayerScore;
+
         /// <summary>
         /// 
         /// </summary>
@@ -266,16 +268,16 @@ namespace Memory
             {
                 SubmitScore(this.player1, this.player1Score, this.TotalTime);
 
-                return "U heeft het spel voltooid met een score van: " + this.player1Score;
+                return "U heeft het spel voltooid met een score van: " + singlePlayerScore;
             }
         }
         
         /// <summary>
         /// used to submit the highscore of the player
         /// </summary>
-        /// <param name="playername"></param>
-        /// <param name="score"></param>
-        /// <param name="timer"></param>
+        /// <param name="playername">string of the playername</param>
+        /// <param name="score">int of the score</param>
+        /// <param name="timer">int of the time in seconds</param>
         private void SubmitScore(string playername, int score, int timer)
 
         {
@@ -284,12 +286,14 @@ namespace Memory
 
             string time = minutes + " : " + seconds;
 
-            highscoreList.AddHighscore(new Highscore(playername, score, time));
+            singlePlayerScore += score * 4 / (1 + minutes);
+
+            highscoreList.AddHighscore(new Highscore(playername, singlePlayerScore, time));
             highscoreList.Save();
         }
 
         /// <summary>
-        /// 
+        /// updates the score of the current player if a card is flipped
         /// </summary>
         private void UpdateScore()
         {            

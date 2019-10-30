@@ -26,7 +26,7 @@ namespace Memory.Classes
         public string Time { get; set; }
 
         /// <summary>
-        /// 
+        /// class used to store highscore data in
         /// </summary>
         /// <param name="Name">string of the player name</param>
         /// <param name="Score">int of the score achieved in the game</param>
