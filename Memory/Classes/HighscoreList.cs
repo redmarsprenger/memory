@@ -108,7 +108,7 @@ namespace Memory.Classes
         /// <summary>
         /// fetches the list of highscores
         /// </summary>
-        /// <returns>the list of highscores</returns>
+        /// <returns>List<Highscore></returns>
         public List<Highscore> GetList()
         {
             return this.Highscores;
