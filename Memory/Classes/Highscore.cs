@@ -25,6 +25,12 @@ namespace Memory.Classes
         /// </summary>
         public DateTime Time { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="Score"></param>
+        /// <param name="Time"></param>
         public Highscore(string Name, int Score, DateTime Time)
         {
             this.Name = Name;

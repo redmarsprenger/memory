@@ -24,27 +24,44 @@ namespace Memory
     /// </summary>
     public partial class SpelPage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public SpelPage()
         {
             InitializeComponent();
         }
 
-        private void SpelSelectiebtn_Click(object sender, RoutedEventArgs e)
-        {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelSelectiePage.xaml", UriKind.Relative));
-        }
-
-        private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
         }
 
-        // this is the button to select a gamefile so you can replay old games THIS IS STILL WIP furthermore this brings you for now to the GamePage
-        private void SpelSelectFolderBtn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("SpelSelectiePage.xaml", UriKind.Relative));
+        }
+
+        /// <summary>
+        /// Loads saved game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoadGame_Click(object sender, RoutedEventArgs e)
         {
             var gamePage = new GamePage(this, "F");
             NavigationService.Navigate(gamePage);

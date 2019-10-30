@@ -26,9 +26,11 @@ namespace Memory
         /// List of Highscore objects
         /// </summary>
         //public List<Highscore> Highscores;
-
         public HighscoreList highscoreList = HighscoreList.Instance();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public HighScorePage()
         {
             InitializeComponent();
@@ -46,6 +48,11 @@ namespace Memory
             HighscoreTable.ItemsSource = highscoreList.GetList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//

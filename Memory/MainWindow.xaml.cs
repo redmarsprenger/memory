@@ -26,6 +26,9 @@ namespace Memory
         public System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
         private object soundLocation;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +51,9 @@ namespace Memory
             frmMainContent.Source = welcomeUri; // initialize the beginner frame with the "WelkomPage" view
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void toggleMusic()
         {
             //Loops music in background if music setting is on
@@ -61,6 +67,11 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             sp.Stop();

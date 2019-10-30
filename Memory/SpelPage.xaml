@@ -9,10 +9,10 @@
       Title="SpelPage" Width="775" Height="410" MinWidth="775" MinHeight="410">
     <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
         <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
-        <Button x:Name="BacktoStartbtn" Content="Terug" Margin="32,31,637,315" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15"  Background="White" Click="BacktoStartbtn_Click"/>
+        <Button x:Name="btnBack" Content="Terug" Margin="32,31,637,315" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15"  Background="White" Click="btnBack_Click"/>
         <!--  here is the button that will deliver you to the spelSelectiewindow. it makes uses of the style roundcorner  -->
-        <Button x:Name="SpelSelectiebtn" Content="Nieuw Spel" Margin="317,154,306,192" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336"  Background="White" Click="SpelSelectiebtn_Click" />
+        <Button x:Name="btnNewGame" Content="Nieuw Spel" Margin="317,154,306,192" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336"  Background="White" Click="btnNewGame_Click" />
         <!--  this is going to be a selection button it will make you be able to select your previous games. it makes uses of the style roundcorner  -->
-        <Button x:Name="SpelSelectFolderBtn" Content="Laad Spel" Margin="317,285,306,61" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Background="White" Click="SpelSelectFolderBtn_Click"/>
+        <Button x:Name="btnLoadGame" Content="Laad Spel" Margin="317,285,306,61" Style="{StaticResource ResourceKey=RoundCorner}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0.501,0.336" Background="White" Click="btnLoadGame_Click"/>
     </Grid>
 </Page>

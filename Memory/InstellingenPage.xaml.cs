@@ -35,6 +35,9 @@ namespace Memory
 
         ImageSourceConverter converter = new ImageSourceConverter();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public InstellingenPage()
         {
             InitializeComponent();
@@ -45,12 +48,22 @@ namespace Memory
             imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnTerug_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnLeft_Click(object sender, RoutedEventArgs e)
         {
             int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
@@ -62,6 +75,11 @@ namespace Memory
             Savetheme(lblActiveTheme.Content, imgTheme.Source.ToString());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRight_Click(object sender, RoutedEventArgs e)
         {
             int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
@@ -73,6 +91,11 @@ namespace Memory
             Savetheme(lblActiveTheme.Content, imgTheme.Source.ToString());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ThemeName"></param>
+        /// <param name="theme"></param>
         private void Savetheme(object ThemeName, string theme)
         {
             Settings.Default["ThemeName"] = ThemeName;
@@ -80,6 +103,12 @@ namespace Memory
             Settings.Default.Save();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strArray"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private string GetNextElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
@@ -94,6 +123,12 @@ namespace Memory
             return strArray[index];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strArray"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private string GetPreviousElement(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
@@ -108,6 +143,12 @@ namespace Memory
             return strArray[index];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strArray"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private int GetNextIndex(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
@@ -122,6 +163,12 @@ namespace Memory
             return index;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strArray"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private int GetPreviousIndex(string[] strArray, int index)
         {
             if ((index > strArray.Length - 1) || (index < 0))
@@ -136,6 +183,11 @@ namespace Memory
             return index;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchMusic_Click(object sender, RoutedEventArgs e)
         {
             SaveSettingsBool("Music");
@@ -143,11 +195,20 @@ namespace Memory
             main.toggleMusic();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchSound_Click(object sender, RoutedEventArgs e)
         {
             SaveSettingsBool("Sound");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="setting"></param>
         private void SaveSettingsBool(string setting)
         {
             if ((bool)Settings.Default[setting])
@@ -159,11 +220,6 @@ namespace Memory
                 Settings.Default[setting] = true;
             }
             Settings.Default.Save();
-        }
-
-        private void ToggleSwitchMusic_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
