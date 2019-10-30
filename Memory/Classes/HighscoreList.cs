@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Memory.Classes
 {
@@ -59,7 +60,7 @@ namespace Memory.Classes
         {
             try
             {
-                FileStream writerFileStream = new FileStream(DATA_FILENAME, FileMode.Append, FileAccess.Write);
+                FileStream writerFileStream = new FileStream(DATA_FILENAME, FileMode.Create, FileAccess.Write);
 
                 this.formatter.Serialize(writerFileStream, this.Highscores);
 
@@ -68,6 +69,8 @@ namespace Memory.Classes
             catch (Exception)
             {
                 //popup or something else that gets thrown when the save doesn't happen
+                MessageBox.Show("the save didn't happen");
+
             }
         }
 

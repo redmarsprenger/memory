@@ -200,14 +200,10 @@ namespace Memory
 
                 card.Source = front;
                 cardsOpen++;
-                if (cardsOpen == 2)
+                if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
                 {
-                    if (!singlePlayer)
-                    {
-                        currentPlayer = (currentPlayer == player1) ? player2 : player1;
-
-                        UpdatePlayer(currentPlayer);
-                    }
+                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                    UpdatePlayer(currentPlayer);
                 }
                 UpdateScore();
 
@@ -282,22 +278,28 @@ namespace Memory
             }
             else
             {
-                return "U heeft het spel voltooid met een score van: " + "42";
+                SubmitScore(this.player1, this.player1Score, this.TotalTime);
+
+                return "U heeft het spel voltooid met een score van: " + this.player1Score;
             }
         }
-
+        
         /// <summary>
-        /// 
+        /// used to submit the highscore of the player
         /// </summary>
-        private void SubmitScore()
+        /// <param name="playername"></param>
+        /// <param name="score"></param>
+        /// <param name="timer"></param>
+        private void SubmitScore(string playername, int score, int timer)
+
         {
-            //this.highscoreList.Load();
+            int minutes = timer / 60;
+            int seconds = timer % 60;
 
-            ////DateTime time = timer.text;
+            string time = minutes + " : " + seconds;
 
-            ////this.highscoreList.AddHighscore(new Highscore(playername, score, time));
-
-            //this.highscoreList.Save();
+            highscoreList.AddHighscore(new Highscore(playername, score, time));
+            highscoreList.Save();
         }
 
         /// <summary>
@@ -307,7 +309,7 @@ namespace Memory
         {            
             if (!singlePlayer && cardsOpen == 2 && firstCard.Tag.ToString() == secondCard.Tag.ToString())
             {
-                if (currentPlayer != player1)
+                if (currentPlayer == player1)
                 {
                     player1Score++;
                 }
@@ -317,6 +319,11 @@ namespace Memory
                 }
                 txtScore_1.Text = player1Score.ToString();
                 txtScore_2.Text = player2Score.ToString();
+            }
+            else
+            {
+                this.player1Score++;
+                txtScore_1.Text = player1Score.ToString();
             }
         }
 

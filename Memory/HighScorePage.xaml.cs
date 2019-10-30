@@ -43,7 +43,7 @@ namespace Memory
 
 //            highscoreList.Save();
 
-            highscoreList.Load();
+            //highscoreList.Load();
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = highscoreList.GetList();
         }

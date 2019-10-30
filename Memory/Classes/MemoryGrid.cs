@@ -152,6 +152,10 @@ namespace Memory.Classes
                     imageNumber++;
                     backgroundimage.DataContext = backgroundimage.Source;
                     backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
+
+                    Style style = gamePage.FindResource("AnimationImage") as Style;
+                    backgroundimage.Style = style;
+
                     Grid.SetColumn(backgroundimage, column);
                     Grid.SetRow(backgroundimage, row);
                     grid.Children.Add(backgroundimage);
