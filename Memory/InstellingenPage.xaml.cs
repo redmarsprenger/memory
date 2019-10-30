@@ -250,6 +250,7 @@ namespace Memory
         private void ToggleSwitchSound_Click(object sender, RoutedEventArgs e)
         {
             SaveSettingsBool("Sound");
+            GamePage gamePage = new GamePage();
         }
 
         /// <summary>

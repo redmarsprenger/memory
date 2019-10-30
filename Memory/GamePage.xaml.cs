@@ -179,9 +179,12 @@ namespace Memory
 
             if (firstCard != card)
             {
-                WinSound.Stop();
-                FailSound.Stop();
-                FlipSound.Play();
+                if ((bool)Settings.Default["Sound"])
+                {
+                    WinSound.Stop();
+                    FailSound.Stop();
+                    FlipSound.Play();
+                }
                 
                 if (cardsOpen == 2)
                 {
@@ -205,15 +208,27 @@ namespace Memory
                     currentPlayer = (currentPlayer == player1) ? player2 : player1;
                     UpdatePlayer(currentPlayer);
                 }
+
+                //soundeffect if you have an equal set of cards
                 else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
                 {
-                    FlipSound.Stop();
-                    WinSound.Play();
+                    if ((bool)Settings.Default["Sound"])
+                    {
+                        FlipSound.Stop();
+                        WinSound.Play();
+                    }
+                    
                 }
+
+                //soundeffect if you have an unequal set of cards
                 else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
                 {
-                    FlipSound.Stop();
-                    FailSound.Play();
+                    if ((bool)Settings.Default["Sound"])
+                    {
+                        FlipSound.Stop();
+                        FailSound.Play();
+                    }
+                    
                 }
                     UpdateScore();
 
