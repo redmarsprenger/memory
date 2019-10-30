@@ -190,14 +190,10 @@ namespace Memory
 
                 card.Source = front;
                 cardsOpen++;
-                if (cardsOpen == 2)
+                if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
                 {
-                    if (!singlePlayer)
-                    {
-                        currentPlayer = (currentPlayer == player1) ? player2 : player1;
-
-                        UpdatePlayer(currentPlayer);
-                    }
+                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                    UpdatePlayer(currentPlayer);
                 }
                 UpdateScore();
 
@@ -293,7 +289,7 @@ namespace Memory
         {            
             if (!singlePlayer && cardsOpen == 2 && firstCard.Tag.ToString() == secondCard.Tag.ToString())
             {
-                if (currentPlayer != player1)
+                if (currentPlayer == player1)
                 {
                     player1Score++;
                 }

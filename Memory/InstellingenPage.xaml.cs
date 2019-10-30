@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Memory.Properties;
+using Path = System.IO.Path;
 
 namespace Memory
 {
@@ -23,14 +26,10 @@ namespace Memory
     {
         string[] theme = new string[]
         {
-            "pack://application:,,,/Memory;component/Resources/themes/Cards/achterkant.png",
-            "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png",
         };
 
         string[] themeNames = new string[]
         {
-            "Cards",
-            "Sport",
         };
 
         ImageSourceConverter converter = new ImageSourceConverter();
@@ -41,11 +40,51 @@ namespace Memory
         public InstellingenPage()
         {
             InitializeComponent();
+
             //Laad alle settings in vanuit de opgeslagen settings.
             ToggleSwitchMusic.IsChecked = (bool)Settings.Default["Music"];
             ToggleSwitchSound.IsChecked = (bool)Settings.Default["Sound"];
             lblActiveTheme.Content = (string)Settings.Default["ThemeName"];
             imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
+
+
+            var projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
+            string baseFolder = Path.Combine(projectPath, "Resources\\themes");
+
+
+
+            List<string> themeList = new List<string>();
+            List<string> namesList = new List<string>();
+
+//            string baseFolder = "pack://application:,,,//Memory;component//Resources//themes";
+            string[] employeeFolders = Directory.GetDirectories(baseFolder);
+            string imgName = "achterkant.png";
+            foreach (var folderName in employeeFolders)
+            {
+                var path = System.IO.Path.Combine(folderName, imgName);
+                if (File.Exists(path))
+                {
+                    themeList.Add(path);
+                }
+            }
+
+            foreach (var folderName in employeeFolders)
+            {
+                var path = System.IO.Path.Combine(folderName);
+                if (Directory.Exists(path))
+                {
+                    string input = path;
+                    int index = input.IndexOf("themes\\");
+                    if (index > 0)
+                        input = input.Substring(index+7);
+
+                    namesList.Add(input);
+                }
+            }
+
+            theme = themeList.ToArray();
+            themeNames = namesList.ToArray();
         }
 
         /// <summary>
@@ -66,7 +105,7 @@ namespace Memory
         /// <param name="e"></param>
         private void BtnLeft_Click(object sender, RoutedEventArgs e)
         {
-            int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
+            int currentIndex = Array.FindIndex(themeShortner(), row => row.Contains(imgThemeShortner()));
             string nextElement = GetPreviousElement(theme, currentIndex);
 
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
@@ -82,7 +121,8 @@ namespace Memory
         /// <param name="e"></param>
         private void BtnRight_Click(object sender, RoutedEventArgs e)
         {
-            int currentIndex = Array.FindIndex(theme, row => row.Contains(imgTheme.Source.ToString()));
+
+            int currentIndex = Array.FindIndex(themeShortner(), row => row.Contains(imgThemeShortner()));
             string nextElement = GetNextElement(theme, currentIndex);
 
             imgTheme.Source = new BitmapImage(new Uri(nextElement));
@@ -220,6 +260,45 @@ namespace Memory
                 Settings.Default[setting] = true;
             }
             Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string imgThemeShortner()
+        {
+            var imgThemeSource = imgTheme.Source;
+            Uri imgThemeSourceUri = new Uri(imgThemeSource.ToString());
+            string imgThemeString = imgThemeSourceUri.AbsolutePath;
+            int index = imgThemeString.IndexOf("themes/");
+            if (index > 0)
+                imgThemeString = imgThemeString.Substring(index + 7);
+
+            return imgThemeString;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string[] themeShortner()
+        {
+            string[] themes;
+            List<string> listThemes = new List<string>();
+            foreach (var th in theme)
+            {
+                string inputs;
+                inputs = th.Replace('\\', '/');
+                int indexs = inputs.IndexOf("themes/");
+                if (indexs > 0)
+                    inputs = inputs.Substring(indexs + 7);
+
+                listThemes.Add(inputs);
+            }
+            themes = listThemes.ToArray();
+
+            return themes;
         }
     }
 }
