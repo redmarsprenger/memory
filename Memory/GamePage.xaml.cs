@@ -270,7 +270,12 @@ namespace Memory
             }
         }
         
-        
+        /// <summary>
+        /// used to submit the highscore of the player
+        /// </summary>
+        /// <param name="playername"></param>
+        /// <param name="score"></param>
+        /// <param name="timer"></param>
         private void SubmitScore(string playername, int score, int timer)
 
         {
