@@ -231,6 +231,8 @@
   <ItemGroup>
     <Content Include="Resources\Music\background_music.wav" />
     <Content Include="Resources\Music\cardflip.wav" />
+    <Content Include="Resources\Music\fail.wav" />
+    <Content Include="Resources\Music\win.wav" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\themes\Sport\1.png" />

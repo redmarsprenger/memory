@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace Memory
         private bool timerInstance;
         public int TotalTime;
 
+        
         /// <summary>
         /// 
         /// </summary>
@@ -160,6 +162,10 @@ namespace Memory
             txtBeurtNaam.Text = newPlayer;
         }
 
+
+        SoundPlayer FlipSound = new SoundPlayer(@"../../Resources/music/cardflip.wav");
+        SoundPlayer WinSound = new SoundPlayer(@"../../Resources/music/win.wav");
+        SoundPlayer FailSound = new SoundPlayer(@"../../Resources/music/fail.wav");
         /// <summary>
         /// 
         /// </summary>
@@ -173,6 +179,10 @@ namespace Memory
 
             if (firstCard != card)
             {
+                WinSound.Stop();
+                FailSound.Stop();
+                FlipSound.Play();
+                
                 if (cardsOpen == 2)
                 {
                     FlipCards(card, front, back);
@@ -222,6 +232,8 @@ namespace Memory
             {
                 firstCard.Source = back;
                 secondCard.Source = back;
+                FlipSound.Stop();
+                FailSound.Play();
             }
             else
             {
@@ -232,6 +244,8 @@ namespace Memory
                         if (firstCard.Source.ToString() == img.Tag.ToString())
                         {
                             img.Tag = null;
+                            FlipSound.Stop();
+                            WinSound.Play();
                         }
                     }
                 }
@@ -331,20 +345,6 @@ namespace Memory
             return false;
         }
 
-
-        private void card_flip(object sender, MouseButtonEventArgs e)
-        {
-            SoundEffectPlay();
-        }
-
-        private void SoundEffectPlay()
-        {
-            string soundeffect = "../../Resources/music/cardflip.wav";
-            var sound = new System.Media.SoundPlayer(soundeffect);
-            sound.Play();
-        }
-
-      
     }
 }
 
