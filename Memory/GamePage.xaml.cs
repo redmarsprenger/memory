@@ -39,7 +39,6 @@ namespace Memory
         private int player2Score;
         private bool singlePlayer;
 
-        private bool singleplayer;
         private HighscoreList highscoreList = HighscoreList.Instance();
 
         private DispatcherTimer timer = new DispatcherTimer();
