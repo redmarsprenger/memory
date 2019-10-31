@@ -51,8 +51,7 @@ namespace Memory
         private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new WelkomPage());
         }
     }
 }

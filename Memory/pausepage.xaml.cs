@@ -34,7 +34,7 @@ namespace Memory
         }
         
         /// <summary>
-        /// Resumes game
+        /// Resumes game (navigates back to the gamePage with the saved "gamePage")
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -52,8 +52,6 @@ namespace Memory
         {
 
             string gamePageString = XamlWriter.Save(gamePage);
-            //            ObjectSterializer objSterializer = new ObjectSterializer();
-            //            objSterializer.SerializeObject(gamePageString, "SavedGame");
 
             File.WriteAllText("SavedGame", gamePageString);
 

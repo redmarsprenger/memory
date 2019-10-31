@@ -40,8 +40,7 @@ namespace Memory
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new WelkomPage());
         }
 
         /// <summary>
@@ -52,8 +51,7 @@ namespace Memory
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelSelectiePage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new SpelSelectiePage());
         }
 
         /// <summary>

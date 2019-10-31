@@ -21,7 +21,7 @@ namespace Memory
     public partial class WelkomPage : Page
     {
         /// <summary>
-        /// 
+        /// InitializeComponents
         /// </summary>
         public WelkomPage()
         {

@@ -50,7 +50,7 @@ namespace Memory
                 Settings.Default.Save();
             }
 
-            // defines the background music
+            // Defines the background music
             string filename = "../../Resources/music/background_music.wav";
             string path = System.IO.Path.GetFullPath(filename);
             string url = new Uri(path).AbsoluteUri;
@@ -58,8 +58,9 @@ namespace Memory
 
             toggleMusic();
 
+            // initialize the beginner frame with the "WelkomPage" view//
             var welcomeUri = new Uri("WelkomPage.xaml", UriKind.Relative);
-            frmMainContent.Source = welcomeUri; // initialize the beginner frame with the "WelkomPage" view
+            frmMainContent.Source = welcomeUri; 
         }
 
         /// <summary>
