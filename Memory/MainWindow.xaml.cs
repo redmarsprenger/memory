@@ -82,7 +82,6 @@ namespace Memory
         {
             //highscoreList.Save();
             sp.Stop();
-            Application.Current.Exit
         }
     }
 }
