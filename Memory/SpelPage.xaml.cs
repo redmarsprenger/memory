@@ -24,22 +24,19 @@ namespace Memory
     /// </summary>
     public partial class SpelPage : Page
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public SpelPage()
         {
             InitializeComponent();
         }
 
         /// <summary>
-        /// 
+        /// This will display the interaction of going back to the starting page.//
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
+            // through the course of clicking the button the navigation system switches the current frame uri to the new one.//
             NavigationService.Navigate(new WelkomPage());
         }
 
@@ -50,7 +47,7 @@ namespace Memory
         /// <param name="e"></param>
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
+            // through the course of clicking the button the navigation system switches the current frame uri to the new one.//
             NavigationService.Navigate(new SpelSelectiePage());
         }
 
