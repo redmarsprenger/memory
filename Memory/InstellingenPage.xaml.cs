@@ -45,6 +45,17 @@ namespace Memory
             ToggleSwitchMusic.IsChecked = (bool)Settings.Default["Music"];
             ToggleSwitchSound.IsChecked = (bool)Settings.Default["Sound"];
             lblActiveTheme.Content = (string)Settings.Default["ThemeName"];
+            try
+            {
+                imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
+            }
+            catch
+            {
+                Settings.Default["ThemeName"] = "Sport";
+                Settings.Default["Theme"] = "pack://application:,,,/Memory;component/Resources/themes/Sport/achterkant.png";
+                Settings.Default.Save();
+                imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
+            }
             imgTheme.Source = (ImageSource)converter.ConvertFromString((string)Settings.Default["Theme"]);
 
 
