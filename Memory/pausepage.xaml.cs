@@ -23,7 +23,7 @@ namespace Memory
         private GamePage gamePage;
 
         /// <summary>
-        /// 
+        /// InitializeComponents and saves the gamePage so it can be resumed.
         /// </summary>
         /// <param name="gamePage"></param>
         public pausepage(GamePage gamePage)
@@ -57,7 +57,7 @@ namespace Memory
 
             File.WriteAllText("SavedGame", gamePageString);
 
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one
+            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService.Navigate(new WelkomPage());
         }
 

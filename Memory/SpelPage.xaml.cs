@@ -63,8 +63,7 @@ namespace Memory
         /// <param name="e"></param>
         private void btnLoadGame_Click(object sender, RoutedEventArgs e)
         {
-            var gamePage = new GamePage(this, "F");
-            NavigationService.Navigate(gamePage);
+            NavigationService.Navigate(new GamePage(this, "F"));
         }
     }
 }

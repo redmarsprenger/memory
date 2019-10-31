@@ -31,7 +31,10 @@ namespace Memory
         private HighscoreList highscoreList = HighscoreList.Instance();
 
         /// <summary>
-        /// 
+        /// Loads highscores
+        /// Makes sure theme works
+        /// Toggles the background music on or off depending on the settings
+        /// Loads WelkomPage.xaml
         /// </summary>
         public MainWindow()
         {
@@ -39,6 +42,7 @@ namespace Memory
 
             highscoreList.Load();
 
+            // The blue theme is cashed somewhere. We don't know where but this way it gets replaced with the Sport theme if it is active
             if ((string)Settings.Default["ThemeName"] == "blue")
             {
                 Settings.Default["ThemeName"] = "Sport";
@@ -46,6 +50,7 @@ namespace Memory
                 Settings.Default.Save();
             }
 
+            // defines the background music
             string filename = "../../Resources/music/background_music.wav";
             string path = System.IO.Path.GetFullPath(filename);
             string url = new Uri(path).AbsoluteUri;
@@ -58,11 +63,11 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Toggles background music on and off
         /// </summary>
         public void toggleMusic()
         {
-            //Loops music in background if music setting is on
+            //Loops music in background, in separate thread,  if music setting is on
             if ((bool)Settings.Default["Music"])
             {
                 Task.Factory.StartNew(() => { sp.PlayLooping(); });
@@ -74,14 +79,15 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Stop background music
+        /// Makes sure the application completely shuts down
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void mainWindow_Closed(object sender, EventArgs e)
         {
-            //highscoreList.Save();
             sp.Stop();
+            Application.Current.Shutdown();
         }
     }
 }

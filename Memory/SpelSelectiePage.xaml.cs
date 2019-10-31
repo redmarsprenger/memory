@@ -36,8 +36,7 @@ namespace Memory
         private void BacktoSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            var SpelPage = new SpelPage();
-            NavigationService.Navigate(SpelPage);
+            NavigationService.Navigate(new SpelPage());
         }
 
         /// <summary>
@@ -49,13 +48,11 @@ namespace Memory
         {
             if (!Textboxspeler2.IsEnabled)
             {
-                var GamePage = new GamePage(textboxspeler1.Text);
-                NavigationService.Navigate(GamePage);
+                NavigationService.Navigate(new GamePage(textboxspeler1.Text));
             }
             else
             {
-                var GamePage = new GamePage(textboxspeler1.Text, Textboxspeler2.Text);
-                NavigationService.Navigate(GamePage);
+                NavigationService.Navigate(new GamePage(textboxspeler1.Text, Textboxspeler2.Text));
             }
 
         }

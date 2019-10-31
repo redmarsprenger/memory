@@ -145,17 +145,14 @@ namespace Memory
         /// <param name="e"></param>
         public void pauzebtn_Click(object sender, RoutedEventArgs e)
         {
-            var pausePage = new pausepage(this);
-            NavigationService.Navigate(pausePage);
+            NavigationService.Navigate(new pausepage(this));
             // puts a stop on the timer. //
             timer.Stop();
-
-            
         }
 
         
         /// <summary>
-        /// 
+        /// Updates the current player textbox with given string
         /// </summary>
         /// <param name="newPlayer"></param>
         public void UpdatePlayer(string newPlayer)

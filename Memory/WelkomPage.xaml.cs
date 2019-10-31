@@ -29,39 +29,36 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Navigates to InstellingPage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Instellingenbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("InstellingenPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new InstellingenPage());
         }
         
         /// <summary>
-        /// 
+        /// Navigates to SpelPage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Startbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new SpelPage());
         }
 
         /// <summary>
-        /// 
+        /// Navigates to HighScorePage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Highscorebtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("HighScorePage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new HighScorePage());
         }
     }
 }
