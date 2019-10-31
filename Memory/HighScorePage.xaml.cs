@@ -30,7 +30,7 @@ namespace Memory
         public HighscoreList highscoreList = HighscoreList.Instance();
 
         /// <summary>
-        /// 
+        /// constructs the page
         /// </summary>
         public HighScorePage()
         {
@@ -44,7 +44,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// brings you back to the Welkom page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
