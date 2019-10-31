@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Memory.Properties;
 using System.IO;
+using System.Media;
+using System.Threading;
 using Memory.Classes;
 
 namespace Memory
@@ -63,7 +65,7 @@ namespace Memory
             //Loops music in background if music setting is on
             if ((bool)Settings.Default["Music"])
             {
-                sp.Play();
+                Task.Factory.StartNew(() => { sp.PlayLooping(); });
             }
             else
             {
@@ -80,6 +82,7 @@ namespace Memory
         {
             //highscoreList.Save();
             sp.Stop();
+            Application.Current.Exit
         }
     }
 }
