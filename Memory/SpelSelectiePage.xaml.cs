@@ -58,7 +58,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// by checking the switch the user can add a second player
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,7 +71,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// by letting the switch unchecked the user can't add a second player
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
