@@ -41,7 +41,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// This will display the interaction of going back to the starting page.//
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
