@@ -58,7 +58,9 @@ namespace Memory
 //            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
 //            NavigationService.Navigate(new WelkomPage());
 
-            NavigationService.Navigate(gamePage);
+
+            gamePage.SaveGamePage();
+            NavigationService.Navigate(new WelkomPage());
         }
 
         /// <summary>
