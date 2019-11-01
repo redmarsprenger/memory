@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WelkomPage" Width="775" Height="410" MinWidth="775" MinHeight="410">
-    <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410" Margin="0,4,0.2,-4.4">
+    <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
         <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
         <Button x:Name="Instellingenbtn" Content="Instellingen" Margin="32,31,637,315" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Click="Instellingenbtn_Click" Background="White"/>
         <!--  here is the button that will deliver you to the spelwindow. it makes uses of the style roundcorner  -->
