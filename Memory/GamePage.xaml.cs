@@ -174,7 +174,7 @@ namespace Memory
             ImageSource front = (ImageSource)card.Tag;
             ImageSource back = (ImageSource)card.DataContext;
 
-            if (firstCard != card)
+            if (firstCard != card && secondCard != card)
             {
                 if ((bool)Settings.Default["Sound"])
                 {
