@@ -158,6 +158,7 @@ namespace Memory
                 txtBeurtNaam.Text = currentPlayer;
                 grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true);
                 bgImages = grid.getBgImages();
+                SetCards();
             }
         }
 
@@ -411,6 +412,18 @@ namespace Memory
 
             firstCard = null;
             secondCard = null;
+        }
+
+        private void SetCards()
+        {
+            foreach (Image img in bgImages)
+            {
+                if (img.Tag == "")
+                {
+                    img.Source = null;
+                    img.MouseDown -= new MouseButtonEventHandler(this.cardclick);
+                }
+            }
         }
 
         /// <summary>
