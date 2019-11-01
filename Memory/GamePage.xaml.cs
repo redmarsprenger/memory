@@ -232,7 +232,8 @@ namespace Memory
                     }
                     
                 }
-                    UpdateScore();
+                    
+                UpdateScore();
 
                 if (cardsOpen == 2 && CheckWinner())
                 {
@@ -345,7 +346,7 @@ namespace Memory
                 txtScore_1.Text = player1Score.ToString();
                 txtScore_2.Text = player2Score.ToString();
             }
-            else
+            else if(singlePlayer)
             {
                 this.player1Score++;
                 txtScore_1.Text = player1Score.ToString();

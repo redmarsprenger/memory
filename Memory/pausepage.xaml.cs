@@ -51,12 +51,14 @@ namespace Memory
         private void Opslaanbtn_Click(object sender, RoutedEventArgs e)
         {
 
-            string gamePageString = XamlWriter.Save(gamePage);
+//            string gamePageString = XamlWriter.Save(gamePage);
+//
+//            File.WriteAllText("SavedGame", gamePageString);
 
-            File.WriteAllText("SavedGame", gamePageString);
+//            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
+//            NavigationService.Navigate(new WelkomPage());
 
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService.Navigate(new WelkomPage());
+            NavigationService.Navigate(gamePage);
         }
 
         /// <summary>
