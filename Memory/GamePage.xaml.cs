@@ -49,12 +49,7 @@ namespace Memory
 
         public bool SaveGamePage()
         {
-            var GridToSave = grid.getGrid();
-
-
             TextWriter tw = new StreamWriter("GamePage.txt");
-
-            // write lines of text to the file
             tw.WriteLine(cardsOpen);
             tw.WriteLine(player1);
             tw.WriteLine(player2);
@@ -77,29 +72,19 @@ namespace Memory
             {
                 tw.WriteLine(secondCard.Tag.ToString());
             }
-            
             tw.WriteLine(player1Score);
             tw.WriteLine(player2Score);
             tw.WriteLine(singlePlayer);
             tw.WriteLine(timerInstance);
             tw.WriteLine(TotalTime);
             tw.WriteLine(singlePlayerScore);
-            //            tw.WriteLine(grid);
-            //            tw.WriteLine(bgImages);
-            //            tw.WriteLine(highscoreList);
-            //            tw.WriteLine(timer);
-
-            // close the stream     
             tw.Close();
 
-
             TextWriter twImages = new StreamWriter("bgImages.txt");
-
             foreach (var bg in bgImages)
             {
                 twImages.WriteLine(bg.Tag);
             }
-
             twImages.Close();
 
             return false;
@@ -133,8 +118,8 @@ namespace Memory
             TotalTime = Convert.ToInt32(tr.ReadLine());
             singlePlayerScore = Convert.ToInt32(tr.ReadLine());
             
-            // close the stream
             tr.Close();
+
             TextReader trImages = new StreamReader("bgImages.txt");
 
             using (trImages)
@@ -149,7 +134,6 @@ namespace Memory
                 }
             }
 
-
             trImages.Close();
         }
 
@@ -163,20 +147,8 @@ namespace Memory
                 grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true, firstCard, secondCard);
                 bgImages = grid.getBgImages();
                 SetCards();
-
-
-//                ImageSource firstCardFront = (ImageSource)firstCard.Tag;
-//                ImageSource firstCardBack = (ImageSource)firstCard.DataContext;
-//                firstCard.Source = firstCardBack;
-////                FlipCards(firstCard, firstCardFront, firstCardBack);
-//
-//                ImageSource secondCardFront = (ImageSource)secondCard.Tag;
-//                ImageSource secondCardBack = (ImageSource)secondCard.DataContext;
-//                secondCard.Source = secondCardBack;
-//                FlipCards(secondCard, secondCardFront, secondCardBack);
             }
         }
-
 
         /// <summary>
         /// 
@@ -430,11 +402,13 @@ namespace Memory
             {
                 foreach (Image img in bgImages)
                 {
-                    if (img.Tag != null)
+                    if (img.Tag != null && img.Tag != "")
                     {
+                        img.Source = back;
                         if (firstCard.Source.ToString() == img.Tag.ToString())
                         {
                             img.Tag = null;
+                            img.Source = null;
                         }
                     }
                 }
@@ -544,7 +518,7 @@ namespace Memory
             bgImages.ForEach(delegate (Image img)
             {
                 imagesFlipped2++;
-                if (img.Tag == null)
+                if (img.Tag == null || img.Tag == "")
                 {
                     imagesFlipped++;
                 }
