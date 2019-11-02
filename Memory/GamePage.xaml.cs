@@ -326,7 +326,11 @@ namespace Memory
                 cardsOpen = 0;
             }
 
-            if (firstCard == secondCard)
+            if (firstCard == null || firstCard == secondCard)
+            {
+                firstCard = card;
+            }
+            else if (firstCard.Tag.ToString() == "")
             {
                 firstCard = card;
             }
@@ -390,7 +394,7 @@ namespace Memory
             {
                 foreach (var img in bgImages)
                 {
-                    if (img.Tag != null && img.Tag != "")
+                    if (img.Tag != null && img.Tag != "" && img.Source != null && img.Source != back)
                     {
                         img.Source = back;
                     }
@@ -402,10 +406,14 @@ namespace Memory
             {
                 foreach (Image img in bgImages)
                 {
-                    if (img.Tag != null && img.Tag != "")
+                    if (img.Tag != null && img.Tag != "" && firstCard.Source != null && secondCard.Source != null)
                     {
-                        img.Source = back;
                         if (firstCard.Source.ToString() == img.Tag.ToString())
+                        {
+                            img.Tag = null;
+                            img.Source = null;
+                        }
+                        else if (secondCard.Source.ToString() == img.Tag.ToString())
                         {
                             img.Tag = null;
                             img.Source = null;
@@ -414,6 +422,8 @@ namespace Memory
                 }
                 firstCard.Source = null;
                 secondCard.Source = null;
+                firstCard.Tag = null;
+                secondCard.Tag = null;
             }
 
             firstCard = null;
