@@ -26,19 +26,14 @@ namespace Memory.Classes
 
         private int rows;
         private int cols;
-        private int cardsOpen;
-
-        private Image firstCard;
-        private Image secondCard;
 
         private List<ImageSource> images = new List<ImageSource>();
         private List<Image> bgImages = new List<Image>();
 
-        private string _currentPlayer = "";
-        private string player1 = "";
-        private string player2 = "";
-
         private GamePage gamePage;
+
+        private Image firstCard;
+        private Image secondCard;
 
         /// <summary>
         /// 
@@ -48,31 +43,42 @@ namespace Memory.Classes
         /// <param name="rows"></param>
         /// <param name="player"></param>
         /// <param name="gamePage"></param>
-        public MemoryGrid(Grid grid, int cols, int rows, string player, GamePage gamePage)
+        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame, Image firstCard, Image secondCard)
         {
             this.rows = rows;
             this.cols = cols;
             this.grid = grid;
-            this.player1 = player;
             this.gamePage = gamePage;
-            _currentPlayer = player1;
+            this.firstCard = firstCard;
+            this.secondCard = secondCard;
             InitializeGameGrid(cols, rows);
-            AddImages();
+            if (loadGame)
+            {
+                LoadImages(backImages);
+            }
+            else
+            {
+                AddImages();
+            }
         }
 
-        // Two player grid
-        public MemoryGrid(Grid grid, int cols, int rows, string player1, string player2, GamePage gamePage)
-        {
-            this.rows = rows;
-            this.cols = cols;
-            this.grid = grid;
-            this.player1 = player1;
-            this.player2 = player2;
-            this.gamePage = gamePage;
-            _currentPlayer = player1;
-            InitializeGameGrid(cols, rows);
-            AddImages();
-        }
+//        // Two player grid
+//        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame)
+//        {
+//            this.rows = rows;
+//            this.cols = cols;
+//            this.grid = grid;
+//            this.gamePage = gamePage;
+//            InitializeGameGrid(cols, rows);
+//            if (loadGame)
+//            {
+//                LoadImages(backImages);
+//            }
+//            else
+//            {
+//                AddImages();
+//            }
+//        }
 
         /// <summary>
         /// 
@@ -81,8 +87,6 @@ namespace Memory.Classes
         /// <param name="player"></param>
         public MemoryGrid(String savedGrid, string player)
         {
-            this.player1 = player;
-            _currentPlayer = player1;
             StringReader stringReader = new StringReader(savedGrid);
             XmlReader xmlReader = XmlReader.Create(stringReader);
             Grid readerLoadGrid = (Grid)XamlReader.Load(xmlReader);
@@ -111,7 +115,7 @@ namespace Memory.Classes
                 images.Add(source);
             }
 
-//            images = randomize(images);
+            images = randomize(images);
 
             return images;
         }
@@ -152,6 +156,49 @@ namespace Memory.Classes
                     imageNumber++;
                     backgroundimage.DataContext = backgroundimage.Source;
                     backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
+
+                    Style style = gamePage.FindResource("AnimationImage") as Style;
+                    backgroundimage.Style = style;
+
+                    Grid.SetColumn(backgroundimage, column);
+                    Grid.SetRow(backgroundimage, row);
+                    grid.Children.Add(backgroundimage);
+                    bgImages.Add(backgroundimage);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadImages(List<Image> savedImages)
+        {
+            int imageNumber = 0;
+            for (int row = 0; row < rows; row++)
+            {
+                for (int column = 0; column < cols; column++)
+                {
+                    Image backgroundimage = savedImages[imageNumber];
+
+                    if (backgroundimage.Tag.ToString() == firstCard.Source.ToString())
+                    {
+                        backgroundimage.Source = firstCard.Source;
+                    }
+                    else if(backgroundimage.Tag.ToString() == secondCard.Source.ToString())
+                    {
+                        backgroundimage.Source = secondCard.Source;
+                    }
+                    else
+                    {
+                        backgroundimage.Source = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+                    }
+                    backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
+
+                    backgroundimage.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+                    //                    backgroundimage.Tag = images[imageNumber];
+                    imageNumber++;
 
                     Style style = gamePage.FindResource("AnimationImage") as Style;
                     backgroundimage.Style = style;

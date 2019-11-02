@@ -47,6 +47,109 @@ namespace Memory
 
         private int singlePlayerScore;
 
+        public bool SaveGamePage()
+        {
+            TextWriter tw = new StreamWriter("GamePage.txt");
+            tw.WriteLine(cardsOpen);
+            tw.WriteLine(player1);
+            tw.WriteLine(player2);
+            tw.WriteLine(currentPlayer);
+            if (firstCard == null)
+            {
+                firstCard = new Image();
+                tw.WriteLine();
+            }
+            else
+            {
+                tw.WriteLine(firstCard.Tag.ToString());
+            }
+            if (secondCard == null)
+            {
+                secondCard = new Image();
+                tw.WriteLine();
+            }
+            else
+            {
+                tw.WriteLine(secondCard.Tag.ToString());
+            }
+            tw.WriteLine(player1Score);
+            tw.WriteLine(player2Score);
+            tw.WriteLine(singlePlayer);
+            tw.WriteLine(timerInstance);
+            tw.WriteLine(TotalTime);
+            tw.WriteLine(singlePlayerScore);
+            tw.Close();
+
+            TextWriter twImages = new StreamWriter("bgImages.txt");
+            foreach (var bg in bgImages)
+            {
+                twImages.WriteLine(bg.Tag);
+            }
+            twImages.Close();
+
+            return false;
+        }
+
+        public void loadGame()
+        {
+            firstCard = new Image();
+            secondCard = new Image();
+
+            TextReader tr = new StreamReader("GamePage.txt");
+
+            cardsOpen = Convert.ToInt32(tr.ReadLine());
+            player1 = tr.ReadLine();
+            player2 = tr.ReadLine();
+            currentPlayer = tr.ReadLine();
+
+            var card1 = (string)tr.ReadLine();
+            var card2 = (string)tr.ReadLine();
+            firstCard.Tag = stringToBitMap(card1);
+            secondCard.Tag = stringToBitMap(card2);
+            firstCard.Source = stringToBitMap(card1);
+            secondCard.Source = stringToBitMap(card2);
+            firstCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+            secondCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+            player1Score = Convert.ToInt32(tr.ReadLine());
+            player2Score = Convert.ToInt32(tr.ReadLine());
+            singlePlayer = Convert.ToBoolean(tr.ReadLine());
+            timerInstance = Convert.ToBoolean(tr.ReadLine());
+            TotalTime = Convert.ToInt32(tr.ReadLine());
+            singlePlayerScore = Convert.ToInt32(tr.ReadLine());
+            
+            tr.Close();
+
+            TextReader trImages = new StreamReader("bgImages.txt");
+
+            using (trImages)
+            {
+                string line;
+                for (int i = 0; i < (nr_cols * nr_rows); i++)
+                {
+                    Image readImage = new Image();
+                    readImage.Tag = trImages.ReadLine();
+                    readImage.Name = "x" + i;
+                    bgImages.Add(readImage);
+                }
+            }
+
+            trImages.Close();
+        }
+
+        public GamePage(bool loadGame)
+        {
+            InitializeComponent();
+            if (loadGame)
+            {
+                this.loadGame();
+                txtBeurtNaam.Text = currentPlayer;
+                grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true, firstCard, secondCard);
+                bgImages = grid.getBgImages();
+                SetCards();
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -98,9 +201,12 @@ namespace Memory
             this.player1 = Player1;
 
             singlePlayer = true;
+
             txtBeurtNaam.Text = player1;
             currentPlayer = player1;
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, Player1, this);
+
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
+
             bgImages = grid.getBgImages();
         }
 
@@ -119,7 +225,7 @@ namespace Memory
 
             txtBeurtNaam.Text = player1;
             currentPlayer = player1;
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, Player1, Player2, this);
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
             bgImages = grid.getBgImages();
         }
 
@@ -159,6 +265,21 @@ namespace Memory
             txtBeurtNaam.Text = newPlayer;
         }
 
+        private BitmapImage stringToBitMap(string stringPath)
+        {
+            Uri imageUri = new Uri("about:blank");
+            try
+            {
+                imageUri = new Uri(stringPath, UriKind.Relative);
+            }
+            catch
+            {
+                imageUri = new Uri(stringPath);
+            }
+            BitmapImage imageBitmap = new BitmapImage(imageUri);
+            return imageBitmap;
+        }
+
 
         SoundPlayer FlipSound = new SoundPlayer(@"../../Resources/music/cardflip.wav");
         SoundPlayer WinSound = new SoundPlayer(@"../../Resources/music/win.wav");
@@ -171,76 +292,89 @@ namespace Memory
         public void cardclick(object sender, MouseButtonEventArgs e)
         {
             Image card = (Image)sender;
+
+            card.Tag = stringToBitMap(card.Tag.ToString());
+
             ImageSource front = (ImageSource)card.Tag;
             ImageSource back = (ImageSource)card.DataContext;
 
             if (firstCard != card && secondCard != card)
             {
+                if (firstCard == null || secondCard == null)
+                {
+                    runCardClickEvents(card, front, back);
+                }
+                else if (firstCard.Source != card.Source && secondCard.Source != card.Source)
+                {
+                    runCardClickEvents(card, front, back);
+                }
+            }
+        }
+
+        private void runCardClickEvents(Image card, ImageSource front, ImageSource back)
+        {
+            if ((bool)Settings.Default["Sound"])
+            {
+                WinSound.Stop();
+                FailSound.Stop();
+                FlipSound.Play();
+            }
+            
+            if (cardsOpen == 2)
+            {
+                FlipCards(card, front, back);
+                cardsOpen = 0;
+            }
+
+            if (firstCard == secondCard)
+            {
+                firstCard = card;
+            }
+            else
+            {
+                secondCard = card;
+            }
+
+            card.Source = front;
+            cardsOpen++;
+            if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
+            {
                 if ((bool)Settings.Default["Sound"])
                 {
-                    WinSound.Stop();
-                    FailSound.Stop();
-                    FlipSound.Play();
+                    FlipSound.Stop();
+                    FailSound.Play();
                 }
-                
-                if (cardsOpen == 2)
-                {
-                    FlipCards(card, front, back);
-                    cardsOpen = 0;
-                }
+                currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                UpdatePlayer(currentPlayer);
+            }
 
-                if (firstCard == secondCard)
+            //soundeffect if you have an equal set of cards
+            else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
+            {
+                if ((bool)Settings.Default["Sound"])
                 {
-                    firstCard = card;
+                    FlipSound.Stop();
+                    WinSound.Play();
                 }
-                else
-                {
-                    secondCard = card;
-                }
+            }
 
-                card.Source = front;
-                cardsOpen++;
-                if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
+            //soundeffect if you have an unequal set of cards
+            else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
+            {
+                if ((bool) Settings.Default["Sound"])
                 {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        FailSound.Play();
-                    }
-                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
-                    UpdatePlayer(currentPlayer);
+                    FlipSound.Stop();
+                    FailSound.Play();
                 }
+            }
 
-                //soundeffect if you have an equal set of cards
-                else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
-                {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        WinSound.Play();
-                    }
-                    
-                }
+            UpdateScore();
 
-                //soundeffect if you have an unequal set of cards
-                else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
-                {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        FailSound.Play();
-                    }
-                    
-                }
-                    
-                UpdateScore();
-
-                if (cardsOpen == 2 && CheckWinner())
-                {
-                    FlipCards(card, front, back);
-                    MessageBox.Show(GameWinner());
-                    NavigationService.Navigate(new WelkomPage());
-                }
+            if (cardsOpen == 2 && CheckWinner())
+            {
+                FlipCards(card, front, back);
+                MessageBox.Show(GameWinner());
+                NavigationService.Navigate(new WelkomPage());
             }
         }
 
@@ -254,6 +388,13 @@ namespace Memory
         {
             if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
             {
+                foreach (var img in bgImages)
+                {
+                    if (img.Tag != null && img.Tag != "")
+                    {
+                        img.Source = back;
+                    }
+                }
                 firstCard.Source = back;
                 secondCard.Source = back;
             }
@@ -261,11 +402,13 @@ namespace Memory
             {
                 foreach (Image img in bgImages)
                 {
-                    if (img.Tag != null)
+                    if (img.Tag != null && img.Tag != "")
                     {
+                        img.Source = back;
                         if (firstCard.Source.ToString() == img.Tag.ToString())
                         {
                             img.Tag = null;
+                            img.Source = null;
                         }
                     }
                 }
@@ -275,6 +418,18 @@ namespace Memory
 
             firstCard = null;
             secondCard = null;
+        }
+
+        private void SetCards()
+        {
+            foreach (Image img in bgImages)
+            {
+                if (img.Tag == "")
+                {
+                    img.Source = null;
+                    img.MouseDown -= new MouseButtonEventHandler(this.cardclick);
+                }
+            }
         }
 
         /// <summary>
@@ -315,7 +470,6 @@ namespace Memory
         /// <param name="score">int of the score</param>
         /// <param name="timer">int of the time in seconds</param>
         private void SubmitScore(string playername, int score, int timer)
-
         {
             int minutes = timer / 60;
             int seconds = timer % 60;
@@ -364,7 +518,7 @@ namespace Memory
             bgImages.ForEach(delegate (Image img)
             {
                 imagesFlipped2++;
-                if (img.Tag == null)
+                if (img.Tag == null || img.Tag == "")
                 {
                     imagesFlipped++;
                 }
