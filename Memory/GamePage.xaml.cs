@@ -328,71 +328,81 @@ namespace Memory
 
             if (firstCard != card && secondCard != card)
             {
+                if (firstCard == null || secondCard == null)
+                {
+                    runCardClickEvents(card, front, back);
+                }
+                else if (firstCard.Source != card.Source && secondCard.Source != card.Source)
+                {
+                    runCardClickEvents(card, front, back);
+                }
+            }
+        }
+
+        private void runCardClickEvents(Image card, ImageSource front, ImageSource back)
+        {
+            if ((bool)Settings.Default["Sound"])
+            {
+                WinSound.Stop();
+                FailSound.Stop();
+                FlipSound.Play();
+            }
+            
+            if (cardsOpen == 2)
+            {
+                FlipCards(card, front, back);
+                cardsOpen = 0;
+            }
+
+            if (firstCard == secondCard)
+            {
+                firstCard = card;
+            }
+            else
+            {
+                secondCard = card;
+            }
+
+            card.Source = front;
+            cardsOpen++;
+            if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
+            {
                 if ((bool)Settings.Default["Sound"])
                 {
-                    WinSound.Stop();
-                    FailSound.Stop();
-                    FlipSound.Play();
+                    FlipSound.Stop();
+                    FailSound.Play();
                 }
-                
-                if (cardsOpen == 2)
-                {
-                    FlipCards(card, front, back);
-                    cardsOpen = 0;
-                }
+                currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                UpdatePlayer(currentPlayer);
+            }
 
-                if (firstCard == secondCard)
+            //soundeffect if you have an equal set of cards
+            else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
+            {
+                if ((bool)Settings.Default["Sound"])
                 {
-                    firstCard = card;
+                    FlipSound.Stop();
+                    WinSound.Play();
                 }
-                else
-                {
-                    secondCard = card;
-                }
+            }
 
-                card.Source = front;
-                cardsOpen++;
-                if (cardsOpen == 2 && !singlePlayer && firstCard.Tag.ToString() != secondCard.Tag.ToString())
+            //soundeffect if you have an unequal set of cards
+            else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
+            {
+                if ((bool) Settings.Default["Sound"])
                 {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        FailSound.Play();
-                    }
-                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
-                    UpdatePlayer(currentPlayer);
+                    FlipSound.Stop();
+                    FailSound.Play();
                 }
+            }
 
-                //soundeffect if you have an equal set of cards
-                else if (cardsOpen == 2 && firstCard.Source.ToString() == secondCard.Tag.ToString())
-                {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        WinSound.Play();
-                    }
-                    
-                }
+            UpdateScore();
 
-                //soundeffect if you have an unequal set of cards
-                else if (cardsOpen == 2 && firstCard.Source.ToString() != secondCard.Tag.ToString())
-                {
-                    if ((bool)Settings.Default["Sound"])
-                    {
-                        FlipSound.Stop();
-                        FailSound.Play();
-                    }
-                    
-                }
-                    
-                UpdateScore();
-
-                if (cardsOpen == 2 && CheckWinner())
-                {
-                    FlipCards(card, front, back);
-                    MessageBox.Show(GameWinner());
-                    NavigationService.Navigate(new WelkomPage());
-                }
+            if (cardsOpen == 2 && CheckWinner())
+            {
+                FlipCards(card, front, back);
+                MessageBox.Show(GameWinner());
+                NavigationService.Navigate(new WelkomPage());
             }
         }
 
@@ -406,6 +416,13 @@ namespace Memory
         {
             if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
             {
+                foreach (var img in bgImages)
+                {
+                    if (img.Tag != null && img.Tag != "")
+                    {
+                        img.Source = back;
+                    }
+                }
                 firstCard.Source = back;
                 secondCard.Source = back;
             }
