@@ -32,6 +32,9 @@ namespace Memory.Classes
 
         private GamePage gamePage;
 
+        private Image firstCard;
+        private Image secondCard;
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,12 +43,14 @@ namespace Memory.Classes
         /// <param name="rows"></param>
         /// <param name="player"></param>
         /// <param name="gamePage"></param>
-        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame)
+        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame, Image firstCard, Image secondCard)
         {
             this.rows = rows;
             this.cols = cols;
             this.grid = grid;
             this.gamePage = gamePage;
+            this.firstCard = firstCard;
+            this.secondCard = secondCard;
             InitializeGameGrid(cols, rows);
             if (loadGame)
             {
@@ -168,7 +173,6 @@ namespace Memory.Classes
         /// </summary>
         private void LoadImages(List<Image> savedImages)
         {
-            images = GetImagesList();
             int imageNumber = 0;
             for (int row = 0; row < rows; row++)
             {
@@ -176,11 +180,25 @@ namespace Memory.Classes
                 {
                     Image backgroundimage = savedImages[imageNumber];
 
-                    backgroundimage.Source = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
-//                    backgroundimage.Tag = images[imageNumber];
-                    imageNumber++;
-                    backgroundimage.DataContext = backgroundimage.Source;
+                    if (backgroundimage.Tag.ToString() == firstCard.Source.ToString())
+                    {
+                        backgroundimage.Source = firstCard.Source;
+                    }
+                    else if(backgroundimage.Tag.ToString() == secondCard.Source.ToString())
+                    {
+                        backgroundimage.Source = secondCard.Source;
+                    }
+                    else
+                    {
+                        backgroundimage.Source = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+                    }
                     backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
+
+                    backgroundimage.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+                    //                    backgroundimage.Tag = images[imageNumber];
+                    imageNumber++;
 
                     Style style = gamePage.FindResource("AnimationImage") as Style;
                     backgroundimage.Style = style;

@@ -121,6 +121,10 @@ namespace Memory
             var card2 = (string)tr.ReadLine();
             firstCard.Tag = stringToBitMap(card1);
             secondCard.Tag = stringToBitMap(card2);
+            firstCard.Source = stringToBitMap(card1);
+            secondCard.Source = stringToBitMap(card2);
+            firstCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+            secondCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
 
             player1Score = Convert.ToInt32(tr.ReadLine());
             player2Score = Convert.ToInt32(tr.ReadLine());
@@ -156,9 +160,20 @@ namespace Memory
             {
                 this.loadGame();
                 txtBeurtNaam.Text = currentPlayer;
-                grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true);
+                grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true, firstCard, secondCard);
                 bgImages = grid.getBgImages();
                 SetCards();
+
+
+//                ImageSource firstCardFront = (ImageSource)firstCard.Tag;
+//                ImageSource firstCardBack = (ImageSource)firstCard.DataContext;
+//                firstCard.Source = firstCardBack;
+////                FlipCards(firstCard, firstCardFront, firstCardBack);
+//
+//                ImageSource secondCardFront = (ImageSource)secondCard.Tag;
+//                ImageSource secondCardBack = (ImageSource)secondCard.DataContext;
+//                secondCard.Source = secondCardBack;
+//                FlipCards(secondCard, secondCardFront, secondCardBack);
             }
         }
 
@@ -218,7 +233,7 @@ namespace Memory
             txtBeurtNaam.Text = player1;
             currentPlayer = player1;
 
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false);
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
 
             bgImages = grid.getBgImages();
         }
@@ -238,7 +253,7 @@ namespace Memory
 
             txtBeurtNaam.Text = player1;
             currentPlayer = player1;
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false);
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
             bgImages = grid.getBgImages();
         }
 
