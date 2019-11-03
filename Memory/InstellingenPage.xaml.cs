@@ -139,6 +139,8 @@ namespace Memory
         private void ToggleSwitchMusic_Click(object sender, RoutedEventArgs e)
         {
             SaveSettingsBool("Music");
+            MainWindow main = new MainWindow();
+            main.toggleMusic();
         }
 
         private void ToggleSwitchSound_Click(object sender, RoutedEventArgs e)

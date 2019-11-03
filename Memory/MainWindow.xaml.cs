@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Memory.Properties;
+using System.IO;
+
 
 namespace Memory
 {
@@ -20,13 +23,35 @@ namespace Memory
     /// </summary>
     public partial class MainWindow : Window
     {
+        public System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+        private object soundLocation;
+
         public MainWindow()
         {
-
             InitializeComponent();
-            // Manually alter window height and width
-            this.SizeToContent = SizeToContent.Manual;
-            frmMainContent.Source = new Uri("WelkomPage.xaml", UriKind.Relative); // initialize the beginner frame with the "WelkomPage" view
+            
+            string filename = "../../Resources/music/background_music.wav";
+            string path = System.IO.Path.GetFullPath(filename);
+            string url = new Uri(path).AbsoluteUri;
+            sp.SoundLocation = url;
+
+            toggleMusic();
+
+            var welcomeUri = new Uri("WelkomPage.xaml", UriKind.Relative);
+            frmMainContent.Source = welcomeUri; // initialize the beginner frame with the "WelkomPage" view
+        }
+
+        public void toggleMusic()
+        {
+            //Loops music in background if music setting is on
+            if ((bool)Settings.Default["Music"])
+            {
+                sp.Play();
+            }
+            else
+            {
+                sp.Stop();
+            }
         }
     }
 }

@@ -58,6 +58,10 @@
     <Compile Include="Classes\Highscore.cs" />
     <Compile Include="Classes\HighscoreList.cs" />
     <Compile Include="Classes\MemoryGrid.cs" />
+    <Compile Include="Classes\ObjectSterializer.cs" />
+    <Compile Include="BlancPage.xaml.cs">
+      <DependentUpon>BlancPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -79,6 +83,10 @@
     <Compile Include="WelkomPage.xaml.cs">
       <DependentUpon>WelkomPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="BlancPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,7 +228,9 @@
     <Resource Include="icons memory\7.png" />
     <Resource Include="icons memory\8.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Music\background_music.wav" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\themes\Sport\1.png" />
     <Resource Include="Resources\themes\Sport\2.png" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -27,22 +29,36 @@ namespace Memory
         public GamePage()
         {
             InitializeComponent();
+
             grid = new MemoryGrid(GameGrid, nr_cols, nr_rows);
+        }
+        public GamePage(SpelPage spelPage)
+        {
+            InitializeComponent();
+            string savedGrid = File.ReadAllText("SavedGrid");
+            grid = new MemoryGrid(savedGrid);
+            Grid Grid = grid.getGrid();
             
         }
 
-        private void pauzebtn_Click(object sender, RoutedEventArgs e)
+        public void pauzebtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("pausepage.xaml", UriKind.Relative));
+            /**        POGING TOT SPEL OPSLAAN          **/
+            //            Grid Grid = grid.getGrid();
+            //            string gamePageString = XamlWriter.Save(Grid);
+            //
+            //            File.WriteAllText("SavedGrid", gamePageString);
+            /** Zorgt ervoor dat je terug gaat naar de huidige staat van het spel als je verder wilt gaan. **/
+            var pausePage = new pausepage(this);
+            NavigationService.Navigate(pausePage);
+
+            //            NavigationService ns = NavigationService.GetNavigationService(this);
+            //            ns.Navigate(new Uri("pausepage.xaml", UriKind.Relative));
         }
     }
     
 }
 
 
-
-
-    
 
 
