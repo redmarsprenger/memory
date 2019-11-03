@@ -7,28 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePage">
-
-    <Grid Background="White" Width="775" Height="441">
-        <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
-        <Button x:Name="pauzebtn" Content="Pauze" Margin="652,31,32,348" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15"  Background="White" Click="pauzebtn_Click" />
-        <Grid HorizontalAlignment="Left" Height="325" Margin="50,106,0,0" VerticalAlignment="Top" Width="693" Background="#FFE7E7E7">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="40,10,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="160,10,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image2" HorizontalAlignment="Left" Height="100" Margin="280,10,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image3" HorizontalAlignment="Left" Height="100" Margin="400,10,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-
-            <Image x:Name="image4" HorizontalAlignment="Left" Height="100" Margin="40,120,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image5" HorizontalAlignment="Left" Height="100" Margin="160,120,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image6" HorizontalAlignment="Left" Height="100" Margin="280,120,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image7" HorizontalAlignment="Left" Height="100" Margin="400,120,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-
-            <Image x:Name="image8" HorizontalAlignment="Left" Height="100" Margin="40,230,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image9" HorizontalAlignment="Left" Height="100" Margin="160,230,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image10" HorizontalAlignment="Left" Height="100" Margin="280,230,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-            <Image x:Name="image11" HorizontalAlignment="Left" Height="100" Margin="400,230,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/Memory;component/Resources/memo.png"/>
-
-        </Grid>
+    <Grid Background="White">
+    <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
+        <Button x:Name="pauzebtn" Content="Pauze" Margin="659,10,10,335.6" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Click="pauzebtn_Click" RenderTransformOrigin="0.501,0.336" Grid.ColumnSpan="2" Background="White"/>
 
 
+    <!--memoryspel grid-->
+    <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
     </Grid>
+
+
+
 </Page>

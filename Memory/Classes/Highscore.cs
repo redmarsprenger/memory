@@ -9,6 +9,7 @@ namespace Memory.Classes
     /// <summary>
     /// Highscore object used to store the data of a player after they finish a game
     /// </summary>
+    [Serializable]
     public class Highscore
     {
         /// <summary>

@@ -12,24 +12,37 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Memory.Classes;
+using Memory.Properties;
 
 namespace Memory
 {
-    /// <summary>
-    /// Interaction logic for GamePage.xaml
-    /// </summary>
     public partial class GamePage : Page
     {
+        private const int nr_cols = 4;
+        private const int nr_rows = 4;
+        MemoryGrid grid;
+
+
         public GamePage()
         {
             InitializeComponent();
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows);
+            
         }
 
         private void pauzebtn_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new Uri("pausepage.xaml", UriKind.Relative));
         }
     }
+    
 }
+
+
+
+
+    
+
+
