@@ -75,7 +75,6 @@ namespace Memory
             tw.WriteLine(player1Score);
             tw.WriteLine(player2Score);
             tw.WriteLine(singlePlayer);
-            tw.WriteLine(timerInstance);
             tw.WriteLine(TotalTime);
             tw.WriteLine(singlePlayerScore);
             tw.Close();
@@ -114,7 +113,6 @@ namespace Memory
             player1Score = Convert.ToInt32(tr.ReadLine());
             player2Score = Convert.ToInt32(tr.ReadLine());
             singlePlayer = Convert.ToBoolean(tr.ReadLine());
-            timerInstance = Convert.ToBoolean(tr.ReadLine());
             TotalTime = Convert.ToInt32(tr.ReadLine());
             singlePlayerScore = Convert.ToInt32(tr.ReadLine());
             
