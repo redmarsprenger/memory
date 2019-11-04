@@ -50,15 +50,6 @@ namespace Memory
         /// <param name="e"></param>
         private void Opslaanbtn_Click(object sender, RoutedEventArgs e)
         {
-
-//            string gamePageString = XamlWriter.Save(gamePage);
-//
-//            File.WriteAllText("SavedGame", gamePageString);
-
-//            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-//            NavigationService.Navigate(new WelkomPage());
-
-
             gamePage.SaveGamePage();
             NavigationService.Navigate(new WelkomPage());
         }
