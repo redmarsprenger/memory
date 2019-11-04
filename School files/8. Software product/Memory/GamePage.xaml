@@ -1,0 +1,57 @@
+﻿<Page x:Class="Memory.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Memory"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GamePage" Width="775" Height="410" MinWidth="775" MinHeight="410" Loaded="Page_loaded">
+
+    <Page.Resources>
+        <Style x:Key="AnimationImage" TargetType="{x:Type Image}">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="0" CenterX="20" CenterY="20" />
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="true">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width"
+                                                 From="0" To="360" Duration="0:0:1.0" RepeatBehavior="1x" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White" Width="775" Height="410" MinWidth="775" MinHeight="410">
+        <!--  here is the button that will deliver you to instellingenwindow. it makes uses of the style roundercorners  -->
+        <Button x:Name="pauzebtn" Content="Pauze" Margin="659,10,10,335.6" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="15" Click="pauzebtn_Click" RenderTransformOrigin="0.501,0.336" Grid.ColumnSpan="2" Background="White"/>
+
+
+        <!--memoryspel grid-->
+        <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
+
+        <!--sidebar-->
+        <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
+        <TextBlock x:Name="txtBeurtNaam" Text="..." HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+
+        <Label x:Name="Timerlabel" Content="0" FontSize="20" FontFamily="calibri" HorizontalAlignment="Left" Margin="659,194,0,0" VerticalAlignment="Top" Foreground="#00000000"/>
+
+        <Label x:Name="lblScore1" Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="txtScore_1" Text="0" HorizontalAlignment="Left" Margin="690,112,0,0" VerticalAlignment="Top" Height="21" Width="75"/>
+        <Label x:Name="lblScore2" Content="Score:" HorizontalAlignment="Left" Margin="649,133,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtScore_2" HorizontalAlignment="Left" Margin="690,138,0,0" VerticalAlignment="Top" Height="21" Width="75"/>
+
+    </Grid>
+
+
+
+</Page>
