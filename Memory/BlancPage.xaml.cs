@@ -21,10 +21,13 @@ namespace Memory
 {
     public partial class BlancPage : Page
     {
+        /// <summary>
+        /// Doesn't do anything.
+        /// Please don't add anything in this page, it is meant for copying purposes.
+        /// </summary>
         public BlancPage()
         {
             InitializeComponent();
-
         }
     }
     

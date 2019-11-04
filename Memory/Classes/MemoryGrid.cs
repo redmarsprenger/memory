@@ -22,36 +22,64 @@ namespace Memory.Classes
 {
     class MemoryGrid
     {
-
         private Grid grid;
+
         private int rows;
         private int cols;
-        private int cardsOpen;
+
+        private List<ImageSource> images = new List<ImageSource>();
+        private List<Image> bgImages = new List<Image>();
+
+        private GamePage gamePage;
+
         private Image firstCard;
         private Image secondCard;
-        private List<ImageSource> images = new List<ImageSource>();
 
-        public MemoryGrid(Grid grid, int cols, int rows)
+        /// <summary>
+        /// Initializes the given values of grid, rows, cols, gamepage, firstcard and secondcard.
+        /// calls InitializeGameGrid(cols, rows);
+        /// Puts new images or loads images in depending if loadGame is true.
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="cols"></param>
+        /// <param name="rows"></param>
+        /// <param name="backImages"></param>
+        /// <param name="gamePage"></param>
+        /// <param name="loadGame"></param>
+        /// <param name="firstCard"></param>
+        /// <param name="secondCard"></param>
+        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame, Image firstCard, Image secondCard)
         {
             this.rows = rows;
             this.cols = cols;
             this.grid = grid;
+            this.gamePage = gamePage;
+            this.firstCard = firstCard;
+            this.secondCard = secondCard;
             InitializeGameGrid(cols, rows);
-            AddImages();
+            if (loadGame)
+            {
+                LoadImages(backImages);
+            }
+            else
+            {
+                AddImages();
+            }
         }
 
-        public MemoryGrid(String savedGrid)
-        {
-            StringReader stringReader = new StringReader(savedGrid);
-            XmlReader xmlReader = XmlReader.Create(stringReader);
-            Grid readerLoadGrid = (Grid)XamlReader.Load(xmlReader);
-            this.grid = readerLoadGrid;
-        }
+        /// <summary>
+        /// Returns the grid.
+        /// </summary>
+        /// <returns>grid</returns>
         public Grid getGrid()
         {
             return grid;
         }
 
+        /// <summary>
+        /// Creates a list of all the images of the active theme, randomizes it and returns the list.
+        /// </summary>
+        /// <returns>images</returns>
         private List<ImageSource> GetImagesList()
         {
             for (int i = 0; i < (cols * rows); i++)
@@ -61,16 +89,33 @@ namespace Memory.Classes
                 images.Add(source);
             }
 
-//            Random random = new Random();
-//            for (int i = 0; i < ((cols * rows) / 2); i++)
-//            {
-//                int r = random.Next(0, (rows + cols));
-//                ImageSource temp = images[r];
-//                images[r] = images[i];
-//                images[i] = temp;
-//            }
+            images = randomize(images);
+
             return images;
         }
+
+        /// <summary>
+        /// Randomizes the given List<ImageSource> 
+        /// </summary>
+        /// <param name="imageSources"></param>
+        /// <returns></returns>
+        private List<ImageSource> randomize(List<ImageSource> imageSources)
+        {
+            Random random = new Random();
+            for (int i = 0; i < (cols * rows); i++)
+            {
+                int r = random.Next(0, (rows + cols));
+                ImageSource temp = imageSources[r];
+                imageSources[r] = imageSources[i];
+                imageSources[i] = temp;
+            }
+
+            return imageSources;
+        }
+
+        /// <summary>
+        /// Loads in the images from GetImagesList() and initializes all the images. 
+        /// </summary>
         private void AddImages()
         {
             images = GetImagesList();
@@ -84,93 +129,71 @@ namespace Memory.Classes
                     backgroundimage.Tag = images[imageNumber];
                     imageNumber++;
                     backgroundimage.DataContext = backgroundimage.Source;
-//                    images.RemoveAt(0);
-                    backgroundimage.MouseDown += new MouseButtonEventHandler(cardclick);
+                    backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
+
+                    // adds the AnimationImage style to the cards for a pretty load in.
+                    Style style = gamePage.FindResource("AnimationImage") as Style;
+                    backgroundimage.Style = style;
+
                     Grid.SetColumn(backgroundimage, column);
                     Grid.SetRow(backgroundimage, row);
                     grid.Children.Add(backgroundimage);
+                    bgImages.Add(backgroundimage);
                 }
             }
         }
 
-        private void cardclick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Adds the "savedImages" cards to the grid.
+        /// </summary>
+        /// <param name="savedImages"></param>
+        private void LoadImages(List<Image> savedImages)
         {
-            Image card = (Image) sender;
-            ImageSource front = (ImageSource) card.Tag;
-            ImageSource back = (ImageSource) card.DataContext;
-
-            if (firstCard != card)
+            int imageNumber = 0;
+            // loops trough all the rows and cols
+            for (int row = 0; row < rows; row++)
             {
-                if (cardsOpen == 2)
+                for (int column = 0; column < cols; column++)
                 {
-                    if (firstCard.Tag.ToString() != secondCard.Tag.ToString())
+                    Image backgroundimage = savedImages[imageNumber];
+
+                    // checks if any cards where opened when saved and shows the correct source.
+                    if (backgroundimage.Tag.ToString() == firstCard.Source.ToString())
                     {
-                        firstCard.Source = back;
-                        secondCard.Source = back;
+                        backgroundimage.Source = firstCard.Source;
+                    }
+                    else if(backgroundimage.Tag.ToString() == secondCard.Source.ToString())
+                    {
+                        backgroundimage.Source = secondCard.Source;
                     }
                     else
                     {
-                        firstCard.Source = null;
-                        secondCard.Source = null;
+                        backgroundimage.Source = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
                     }
+                    backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
 
-                    firstCard = null;
-                    secondCard = null;
-                    cardsOpen = 0;
+                    backgroundimage.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+                    imageNumber++;
+
+                    // adds the AnimationImage style to the cards for a pretty load in.
+                    Style style = gamePage.FindResource("AnimationImage") as Style;
+                    backgroundimage.Style = style;
+
+                    Grid.SetColumn(backgroundimage, column);
+                    Grid.SetRow(backgroundimage, row);
+                    grid.Children.Add(backgroundimage);
+                    bgImages.Add(backgroundimage);
                 }
-
-                if (firstCard == secondCard)
-                {
-                    firstCard = card;
-                }
-                else
-                {
-                    secondCard = card;
-                }
-
-                card.Source = front;
-                cardsOpen++;
-
-                if (CheckWinner())
-                {
-                    MessageBox.Show("You've won!'");
-                }
-
-                UpdateScore();
-
-                UpdatePlayer();
             }
         }
 
-        private void UpdatePlayer()
-        {
-
-        }
-
-        private void UpdateScore()
-        {
-
-        }
-
-        private bool CheckWinner()
-        {
-//            int imagesFlipped = 0;
-//            images.ForEach(delegate (ImageSource img)
-//            {
-//                if (img == null)
-//                {
-//                    imagesFlipped++;
-//                }
-//            });
-//
-//            if (imagesFlipped == (cols * rows - 2))
-//            {
-//                return true;
-//            }
-//
-            return false;
-        }
-
+        /// <summary>
+        /// Adds RowDefinitions and ColumnDefinitions to the grid. The amount depends on the given cols and rows.
+        /// </summary>
+        /// <param name="cols"></param>
+        /// <param name="rows"></param>
         private void InitializeGameGrid(int cols, int rows)
         {
             for (int i = 0; i < rows; i++)
@@ -181,6 +204,15 @@ namespace Memory.Classes
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
+        }
+
+        /// <summary>
+        /// Returns bgImages
+        /// </summary>
+        /// <returns>bgImages</returns>
+        public List<Image> getBgImages()
+        {
+            return bgImages;
         }
     }
 }

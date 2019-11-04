@@ -197,13 +197,15 @@
         <!--  here is the button that will create a game for you so that you can play some memory-->
         <Button x:Name="BeginSpelbtn" Content="Begin Spel" Margin="314,285,309,61" Style="{StaticResource ResourceKey=roundercorners}" FontFamily="Calibri" FontSize="20"  Background="White" Click="BeginSpelbtn_Click" Width="152"/>
         <Label x:Name="speler1label" Content=" Speler 1 :" HorizontalAlignment="Left" Margin="216,128,0,0" VerticalAlignment="Top" Width="90" FontFamily="Calibri" FontSize="20"/>
-        <TextBox x:Name="textboxspeler1" HorizontalAlignment="Left" Height="35" Margin="311,128,0,0" TextWrapping="Wrap" Text="naam" VerticalAlignment="Top" Width="158" FontStyle="Italic" FontFamily="Calibri" FontSize="20"/>
-        <TextBox x:Name="Textboxspeler2" HorizontalAlignment="Left" Height="35" Margin="311,213,0,0" TextWrapping="Wrap" Text="naam" VerticalAlignment="Top" Width="158" FontStyle="Italic" FontFamily="Calibri" FontSize="20" IsEnabled="False"/>
+        <TextBox x:Name="textboxspeler1" HorizontalAlignment="Left" Height="35" Margin="311,128,0,0" TextWrapping="Wrap" Text="Speler1" VerticalAlignment="Top" Width="158" FontStyle="Italic" FontFamily="Calibri" FontSize="20"/>
+        <TextBox x:Name="Textboxspeler2" HorizontalAlignment="Left" Height="35" Margin="311,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" FontStyle="Italic" FontFamily="Calibri" FontSize="20" IsEnabled="False" SpellCheck.IsEnabled="True" Text="Speler2"/>
         <!-- De oude button. -->
         <!-- <CheckBox x:Name="Checkbox" Content="Speler 2 :" HorizontalAlignment="Left" Margin="214,226,0,0" VerticalAlignment="Top" Height="35" Width="95" FontFamily="Calibri" FontSize="20" Checked="ToggleSwitchSpeler_Checked" Unchecked="ToggleSwitchSpeler_Unchecked"/> -->
         <ToggleButton x:Name="ToggleSwitchSpeler" FontFamily="Sergio UI" FontSize="16"
             Style="{DynamicResource ToggleSwitchTopStyle}"
-            Margin="167,214,564,168" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="ToggleSwitchSpeler_Checked" Unchecked="ToggleSwitchSpeler_Unchecked" Height="28" Width="44"
+            Margin="167,214,564,168" VerticalAlignment="Center" HorizontalAlignment="Center" 
+            Checked="ToggleSwitchSpeler_Checked" Unchecked="ToggleSwitchSpeler_Unchecked" 
+            Height="28" Width="44"
         />
         <Label x:Name="speler1label_Copy" Content=" Speler 2 :" HorizontalAlignment="Left" Margin="216,214,0,0" VerticalAlignment="Top" Width="90" FontFamily="Calibri" FontSize="20" Height="34"/>
 

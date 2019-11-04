@@ -23,9 +23,15 @@ namespace Memory.Classes
         /// <summary>
         /// Time of the duration of the game
         /// </summary>
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
-        public Highscore(string Name, int Score, DateTime Time)
+        /// <summary>
+        /// class used to store highscore data in
+        /// </summary>
+        /// <param name="Name">string of the player name</param>
+        /// <param name="Score">int of the score achieved in the game</param>
+        /// <param name="Time">string of the time it took to finish a game</param>
+        public Highscore(string Name, int Score, string Time)
         {
             this.Name = Name;
             this.Score = Score;

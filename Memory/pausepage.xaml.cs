@@ -21,6 +21,11 @@ namespace Memory
     public partial class pausepage : Page
     {
         private GamePage gamePage;
+
+        /// <summary>
+        /// InitializeComponents and saves the gamePage so it can be resumed.
+        /// </summary>
+        /// <param name="gamePage"></param>
         public pausepage(GamePage gamePage)
         {
             InitializeComponent();
@@ -28,35 +33,36 @@ namespace Memory
             this.gamePage = gamePage;
         }
         
-        // This is the button to Resume your game with, THIS IS STILL WIP furthermore this will bring you back to the GamePage//
+        /// <summary>
+        /// Resumes game (navigates back to the gamePage with the saved "gamePage")
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hervatbtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(gamePage);
-//            NavigationService ns = NavigationService.GetNavigationService(this);
-//            ns.Navigate(gamePage);
         }
 
-        // this is the button to save the game, THIS IS STILL WIP furthermore this will bring you back to the Welkompage
+        /// <summary>
+        /// Saves the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Opslaanbtn_Click(object sender, RoutedEventArgs e)
         {
-
-            string gamePageString = XamlWriter.Save(gamePage);
-            //            ObjectSterializer objSterializer = new ObjectSterializer();
-            //            objSterializer.SerializeObject(gamePageString, "SavedGame");
-
-
-            File.WriteAllText("SavedGame", gamePageString);
-
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("Welkompage.xaml", UriKind.Relative));
+            gamePage.SaveGamePage();
+            NavigationService.Navigate(new WelkomPage());
         }
 
-        // This is the button to exit the game with, THIS IS STILL WIP furthermore this will bring you back to the WelkomPage//
+        /// <summary>
+        /// Exits the game without saving
+        /// Redirects to WelkomPage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Quitbtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("Welkompage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new WelkomPage());
         }
     }
 }

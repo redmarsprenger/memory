@@ -20,25 +20,48 @@ namespace Memory
     /// </summary>
     public partial class SpelSelectiePage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public SpelSelectiePage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BacktoSpelbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("SpelPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new SpelPage());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BeginSpelbtn_Click(object sender, RoutedEventArgs e)
         {
-            // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+            if (!Textboxspeler2.IsEnabled)
+            {
+                NavigationService.Navigate(new GamePage(textboxspeler1.Text));
+            }
+            else
+            {
+                NavigationService.Navigate(new GamePage(textboxspeler1.Text, Textboxspeler2.Text));
+            }
+
         }
 
+        /// <summary>
+        /// by checking the switch the user can add a second player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchSpeler_Checked(object sender, RoutedEventArgs e)
         {
             if (ToggleSwitchSpeler.IsChecked == true)
@@ -47,6 +70,11 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// by letting the switch unchecked the user can't add a second player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitchSpeler_Unchecked(object sender, RoutedEventArgs e)
         {
             if (ToggleSwitchSpeler.IsChecked == false)

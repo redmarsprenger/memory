@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,31 +27,32 @@ namespace Memory
         /// List of Highscore objects
         /// </summary>
         //public List<Highscore> Highscores;
-
         public HighscoreList highscoreList = HighscoreList.Instance();
 
+        /// <summary>
+        /// constructs the page
+        /// </summary>
         public HighScorePage()
         {
             InitializeComponent();
-            //mock data
-//            highscoreList.AddHighscore(new Highscore("Johan", 24, DateTime.Now));
-//            highscoreList.AddHighscore(new Highscore("Freek", 7, DateTime.Now));
-//            highscoreList.AddHighscore(new Highscore("Anouk", 55, DateTime.Now));
-//            highscoreList.AddHighscore(new Highscore("Emiel", 65, DateTime.Now));
-//            highscoreList.AddHighscore(new Highscore("Mirte", 33, DateTime.Now));
 
-//            highscoreList.Save();
+            //sorts the table with highest score first then time
+            HighscoreTable.Items.SortDescriptions.Add(new SortDescription("Score", ListSortDirection.Descending));
+            HighscoreTable.Items.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Ascending));
 
-            highscoreList.Load();
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = highscoreList.GetList();
         }
 
+        /// <summary>
+        /// brings you back to the Welkom page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BacktoStartbtn_Click(object sender, RoutedEventArgs e)
         {
             // through the course of clicking the button the navigation system switches the current frame uri to the new one//
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("WelkomPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new WelkomPage());
         }
     }
 }

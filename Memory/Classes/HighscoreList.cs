@@ -5,20 +5,36 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Memory.Classes
 {
     public class HighscoreList
     {
-        //https://stackoverflow.com/questions/6115721/how-to-save-restore-serializable-object-to-from-file
-
+        /// <summary>
+        /// singleton object of the class
+        /// </summary>
         private static HighscoreList highscoreList;
-
+        
+        /// <summary>
+        /// list of the highscores that were loaded
+        /// </summary>
         private List<Highscore> Highscores;
+        
+        /// <summary>
+        /// binary formatter used to save and load the data
+        /// </summary>
         private BinaryFormatter formatter;
 
+        /// <summary>
+        /// name of the file that is created (its located somewhere in the bin)
+        /// </summary>
         private const string DATA_FILENAME = "highscorelist.dat";
 
+        /// <summary>
+        /// creates the singleton object, so that there can't exist multiple of this object
+        /// </summary>
+        /// <returns>the singleton object</returns>
         public static HighscoreList Instance()
         {
             if (highscoreList == null)
@@ -28,17 +44,23 @@ namespace Memory.Classes
             return highscoreList;
         }
 
+        /// <summary>
+        /// constructor initializes the properties
+        /// </summary>
         private HighscoreList()
         {
             this.Highscores = new List<Highscore>();
             this.formatter = new BinaryFormatter();
         }
 
+        /// <summary>
+        /// takes the data that is added and saves it in the file
+        /// </summary>
         public void Save()
         {
             try
             {
-                FileStream writerFileStream = new FileStream(DATA_FILENAME, FileMode.Append, FileAccess.Write);
+                FileStream writerFileStream = new FileStream(DATA_FILENAME, FileMode.Create, FileAccess.Write);
 
                 this.formatter.Serialize(writerFileStream, this.Highscores);
 
@@ -47,9 +69,14 @@ namespace Memory.Classes
             catch (Exception)
             {
                 //popup or something else that gets thrown when the save doesn't happen
+                MessageBox.Show("the save didn't happen");
+
             }
         }
 
+        /// <summary>
+        /// reads the data out of the file and puts it in the object
+        /// </summary>
         public void Load()
         {
             if (File.Exists(DATA_FILENAME))
@@ -78,6 +105,10 @@ namespace Memory.Classes
             this.Highscores.Add(highscore);
         }
 
+        /// <summary>
+        /// fetches the list of highscores
+        /// </summary>
+        /// <returns>List<Highscore></returns>
         public List<Highscore> GetList()
         {
             return this.Highscores;

@@ -30,7 +30,7 @@ namespace Memory.Classes
                 // Create a file to write to.
                 File.WriteAllText(fileName, serializableObject);
             }
-            catch (Exception ex)
+            catch
             {
                 //Log exception here
             }
@@ -55,7 +55,7 @@ namespace Memory.Classes
                 // Open the file to read from.
                 objectOut = File.ReadAllText(fileName);
             }
-            catch (Exception ex)
+            catch
             {
                 //Log exception here
             }
