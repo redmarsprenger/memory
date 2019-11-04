@@ -414,7 +414,12 @@ namespace Memory
         private void SubmitScore(string playername, int score, int combo, int timer)
         {
             int minutes = timer / 60;
-            int seconds = timer % 60;
+            string seconds = (timer % 60).ToString();
+
+            if (Int32.Parse(seconds) < 10)
+            {
+                seconds = "0" + seconds;
+            }
 
             string time = minutes + " : " + seconds;
 
