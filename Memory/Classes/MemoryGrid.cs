@@ -102,7 +102,7 @@ namespace Memory.Classes
         private List<ImageSource> randomize(List<ImageSource> imageSources)
         {
             Random random = new Random();
-            for (int i = 0; i < ((cols * rows) / 2); i++)
+            for (int i = 0; i < (cols * rows); i++)
             {
                 int r = random.Next(0, (rows + cols));
                 ImageSource temp = imageSources[r];

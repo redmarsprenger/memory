@@ -48,8 +48,6 @@ namespace Memory
         private int singlePlayerScore;
         private int singlePlayerCombo;
 
-        public bool SaveGamePage()
-
         /// <summary>
         /// Blanc constructor
         /// </summary>
