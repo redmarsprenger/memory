@@ -37,18 +37,18 @@
 
         <!--memoryspel grid-->
         <Grid x:Name="GameGrid" Margin="0,0,131,0"/>
-        
+
         <!--sidebar-->
         <Label x:Name="lblBeurt" Content="Beurt: " HorizontalAlignment="Left" Margin="649,79,0,0" VerticalAlignment="Top" Height="28" Width="81"/>
-        <TextBlock x:Name="txtBeurtNaam" Text="Speler1" HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <TextBlock x:Name="txtBeurtNaam" Text="..." HorizontalAlignment="Left" Margin="690,84,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
 
         <Label x:Name="Timerlabel" Content="0" FontSize="20" FontFamily="calibri" HorizontalAlignment="Left" Margin="659,194,0,0" VerticalAlignment="Top" Foreground="#00000000"/>
-        
-        <Label Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="txtScore" Text="0" HorizontalAlignment="Left" Margin="695,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-        <TextBlock x:Name="txtScore_1" Text="Speler1" HorizontalAlignment="Left" Margin="659,137,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
-        <TextBlock x:Name="txtScore_2" Text="Speler1" HorizontalAlignment="Left" Margin="659,170,0,0" VerticalAlignment="Top" Height="19" Width="75"/>
+        <Label x:Name="lblScore1" Content="Score:" HorizontalAlignment="Left" Margin="649,107,0,0" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="txtScore_1" Text="0" HorizontalAlignment="Left" Margin="690,112,0,0" VerticalAlignment="Top" Height="21" Width="75"/>
+        <Label x:Name="lblScore2" Content="Score:" HorizontalAlignment="Left" Margin="649,133,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtScore_2" HorizontalAlignment="Left" Margin="690,138,0,0" VerticalAlignment="Top" Height="21" Width="75"/>
 
     </Grid>
 

@@ -67,6 +67,7 @@ namespace Memory
             singlePlayer = true;
 
             txtBeurtNaam.Text = player1;
+            lblScore2.Content = "";
             currentPlayer = player1;
 
             grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
@@ -88,6 +89,11 @@ namespace Memory
             singlePlayer = false;
 
             txtBeurtNaam.Text = player1;
+            lblScore1.Content = player1Score.ToString();
+            lblScore2.Content = player2Score.ToString();
+            txtScore_1.Text = player1;
+            txtScore_2.Text = player2;
+
             currentPlayer = player1;
             grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
             bgImages = grid.getBgImages();
@@ -343,7 +349,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// adds MouseDown to all the bgImages
+        /// removes MouseButtonEventHandler from images where tag is empty
         /// </summary>
         private void SetCards()
         {
@@ -424,8 +430,8 @@ namespace Memory
                 {
                     player2Score++;
                 }
-                txtScore_1.Text = player1Score.ToString();
-                txtScore_2.Text = player2Score.ToString();
+                lblScore1.Content = player1Score.ToString();
+                lblScore2.Content = player2Score.ToString();
             }
             else if(singlePlayer)
             {
