@@ -47,6 +47,8 @@ namespace Memory
 
         private int singlePlayerScore;
 
+        private int singlePlayerCombo;
+
         public bool SaveGamePage()
         {
             TextWriter tw = new StreamWriter("GamePage.txt");
@@ -358,6 +360,10 @@ namespace Memory
                     FlipSound.Stop();
                     WinSound.Play();
                 }
+                //adds a point to the score and combometer
+                UpdateScore();
+                singlePlayerCombo++;
+
             }
 
             //soundeffect if you have an unequal set of cards
@@ -368,9 +374,13 @@ namespace Memory
                     FlipSound.Stop();
                     FailSound.Play();
                 }
+
+                //resets the combometer
+                singlePlayerCombo = 0;
+
             }
 
-            UpdateScore();
+            //UpdateScore();
 
             if (cardsOpen == 2 && CheckWinner())
             {
@@ -465,7 +475,7 @@ namespace Memory
             }
             else
             {
-                SubmitScore(this.player1, this.player1Score, this.TotalTime);
+                SubmitScore(this.player1, this.player1Score, this.singlePlayerCombo, this.TotalTime);
 
                 return "U heeft het spel voltooid met een score van: " + singlePlayerScore;
             }
@@ -477,14 +487,14 @@ namespace Memory
         /// <param name="playername">string of the playername</param>
         /// <param name="score">int of the score</param>
         /// <param name="timer">int of the time in seconds</param>
-        private void SubmitScore(string playername, int score, int timer)
+        private void SubmitScore(string playername, int score, int combo, int timer)
         {
             int minutes = timer / 60;
             int seconds = timer % 60;
 
             string time = minutes + " : " + seconds;
 
-            singlePlayerScore += score * 4 / (1 + minutes);
+            singlePlayerScore += score * combo / (1 + minutes);
 
             highscoreList.AddHighscore(new Highscore(playername, singlePlayerScore, time));
             highscoreList.Save();
