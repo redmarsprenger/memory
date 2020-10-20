@@ -46,114 +46,76 @@ namespace Memory
         public int TotalTime;
 
         private int singlePlayerScore;
+        private int singlePlayerCombo;
 
-        public bool SaveGamePage()
+        /// <summary>
+        /// Blanc constructor
+        /// </summary>
+        public GamePage()
         {
-            TextWriter tw = new StreamWriter("GamePage.txt");
-            tw.WriteLine(cardsOpen);
-            tw.WriteLine(player1);
-            tw.WriteLine(player2);
-            tw.WriteLine(currentPlayer);
-            if (firstCard == null)
-            {
-                firstCard = new Image();
-                tw.WriteLine();
-            }
-            else
-            {
-                tw.WriteLine(firstCard.Tag.ToString());
-            }
-            if (secondCard == null)
-            {
-                secondCard = new Image();
-                tw.WriteLine();
-            }
-            else
-            {
-                tw.WriteLine(secondCard.Tag.ToString());
-            }
-            tw.WriteLine(player1Score);
-            tw.WriteLine(player2Score);
-            tw.WriteLine(singlePlayer);
-            tw.WriteLine(TotalTime);
-            tw.WriteLine(singlePlayerScore);
-            tw.Close();
-
-            TextWriter twImages = new StreamWriter("bgImages.txt");
-            foreach (var bg in bgImages)
-            {
-                twImages.WriteLine(bg.Tag);
-            }
-            twImages.Close();
-
-            return false;
+            InitializeComponent();
         }
 
-        public void loadGame()
+        /// <summary>
+        /// Sets the player1, singlePlayer, txtBeurtNaam.Text, currentPlayer and creates a grid by calling MemoryGrid.
+        /// </summary>
+        /// <param name="Player1"></param>
+        public GamePage(string Player1)
         {
-            firstCard = new Image();
-            secondCard = new Image();
+            InitializeComponent();
+            this.player1 = Player1;
 
-            TextReader tr = new StreamReader("GamePage.txt");
+            singlePlayer = true;
 
-            cardsOpen = Convert.ToInt32(tr.ReadLine());
-            player1 = tr.ReadLine();
-            player2 = tr.ReadLine();
-            currentPlayer = tr.ReadLine();
+            txtBeurtNaam.Text = player1;
+            lblScore2.Content = "";
+            currentPlayer = player1;
 
-            var card1 = (string)tr.ReadLine();
-            var card2 = (string)tr.ReadLine();
-            firstCard.Tag = stringToBitMap(card1);
-            secondCard.Tag = stringToBitMap(card2);
-            firstCard.Source = stringToBitMap(card1);
-            secondCard.Source = stringToBitMap(card2);
-            firstCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
-            secondCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
 
-            player1Score = Convert.ToInt32(tr.ReadLine());
-            player2Score = Convert.ToInt32(tr.ReadLine());
-            singlePlayer = Convert.ToBoolean(tr.ReadLine());
-            TotalTime = Convert.ToInt32(tr.ReadLine());
-            singlePlayerScore = Convert.ToInt32(tr.ReadLine());
-            
-            tr.Close();
-
-            TextReader trImages = new StreamReader("bgImages.txt");
-
-            using (trImages)
-            {
-                string line;
-                for (int i = 0; i < (nr_cols * nr_rows); i++)
-                {
-                    Image readImage = new Image();
-                    readImage.Tag = trImages.ReadLine();
-                    readImage.Name = "x" + i;
-                    bgImages.Add(readImage);
-                }
-            }
-
-            trImages.Close();
+            bgImages = grid.getBgImages();
         }
 
+        /// <summary>
+        /// Sets the player1, player2, singlePlayer, txtBeurtNaam.Text, currentPlayer and creates a grid by calling MemoryGrid.
+        /// </summary>
+        /// <param name="Player1"></param>
+        /// <param name="Player2"></param>
+        public GamePage(string Player1, string Player2)
+        {
+            InitializeComponent();
+            this.player1 = Player1;
+            this.player2 = Player2;
+
+            singlePlayer = false;
+
+            txtBeurtNaam.Text = player1;
+            lblScore1.Content = player1Score.ToString();
+            lblScore2.Content = player2Score.ToString();
+            txtScore_1.Text = player1;
+            txtScore_2.Text = player2;
+
+            currentPlayer = player1;
+            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
+            bgImages = grid.getBgImages();
+        }
+
+        /// <summary>
+        /// Contructor to load in a saved game.
+        /// </summary>
+        /// <param name="loadGame"></param>
         public GamePage(bool loadGame)
         {
             InitializeComponent();
             if (loadGame)
             {
+                // Loads the save file and sets all the variables.
                 this.loadGame();
                 txtBeurtNaam.Text = currentPlayer;
                 grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, true, firstCard, secondCard);
                 bgImages = grid.getBgImages();
                 SetCards();
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public GamePage()
-        {
-            InitializeComponent();
         }
 
         /// <summary>
@@ -183,66 +145,14 @@ namespace Memory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void TimeTicker(object sender, EventArgs e) 
+        public void TimeTicker(object sender, EventArgs e)
         {
             TotalTime++;
             Timerlabel.Content = TotalTime.ToString();
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Player1"></param>
-        public GamePage(string Player1)
-        {
-            InitializeComponent();
-            this.player1 = Player1;
-
-            singlePlayer = true;
-
-            txtBeurtNaam.Text = player1;
-            currentPlayer = player1;
-
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
-
-            bgImages = grid.getBgImages();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Player1"></param>
-        /// <param name="Player2"></param>
-        public GamePage(string Player1, string Player2)
-        {
-            InitializeComponent();
-            this.player1 = Player1;
-            this.player2 = Player2;
-
-            singlePlayer = false;
-
-            txtBeurtNaam.Text = player1;
-            currentPlayer = player1;
-            grid = new MemoryGrid(GameGrid, nr_cols, nr_rows, bgImages, this, false, firstCard, secondCard);
-            bgImages = grid.getBgImages();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="spelPage"></param>
-        /// <param name="Player1"></param>
-        public GamePage(SpelPage spelPage, string Player1)
-        {
-            InitializeComponent();
-            string savedGrid = File.ReadAllText("SavedGrid");
-            grid = new MemoryGrid(savedGrid, Player1);
-            Grid Grid = grid.getGrid();
-
-        }
-
-        /// <summary>
-        /// 
+        /// Navigates to pausepage and stops the timer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -263,6 +173,11 @@ namespace Memory
             txtBeurtNaam.Text = newPlayer;
         }
 
+        /// <summary>
+        /// Creates BitmapImage from string
+        /// </summary>
+        /// <param name="stringPath"></param>
+        /// <returns></returns>
         private BitmapImage stringToBitMap(string stringPath)
         {
             Uri imageUri = new Uri("about:blank");
@@ -283,7 +198,7 @@ namespace Memory
         SoundPlayer WinSound = new SoundPlayer(@"../../Resources/music/win.wav");
         SoundPlayer FailSound = new SoundPlayer(@"../../Resources/music/fail.wav");
         /// <summary>
-        /// 
+        /// Handles the click event of the cards
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -309,6 +224,12 @@ namespace Memory
             }
         }
 
+        /// <summary>
+        /// Plays the corresponding sound, flips the card(s) and checks for a winner.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <param name="front"></param>
+        /// <param name="back"></param>
         private void runCardClickEvents(Image card, ImageSource front, ImageSource back)
         {
             if ((bool)Settings.Default["Sound"])
@@ -358,6 +279,10 @@ namespace Memory
                     FlipSound.Stop();
                     WinSound.Play();
                 }
+                //adds a point to the score and combometer
+                UpdateScore();
+                singlePlayerCombo++;
+
             }
 
             //soundeffect if you have an unequal set of cards
@@ -368,9 +293,13 @@ namespace Memory
                     FlipSound.Stop();
                     FailSound.Play();
                 }
+
+                //resets the combometer
+                singlePlayerCombo = 0;
+
             }
 
-            UpdateScore();
+            //UpdateScore();
 
             if (cardsOpen == 2 && CheckWinner())
             {
@@ -381,7 +310,7 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Flips the card(s) depending on what card is clicked what cards are open and sets the card source and tag
         /// </summary>
         /// <param name="card"></param>
         /// <param name="front"></param>
@@ -428,6 +357,9 @@ namespace Memory
             secondCard = null;
         }
 
+        /// <summary>
+        /// removes MouseButtonEventHandler from images where tag is empty
+        /// </summary>
         private void SetCards()
         {
             foreach (Image img in bgImages)
@@ -441,9 +373,11 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Use when there is a winner.
+        /// If singleplayer check highest score and returns winner.
+        /// If not add user score into the highscores and return the user's score.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String</returns>
         private string GameWinner()
         {
             if (!singlePlayer)
@@ -465,7 +399,7 @@ namespace Memory
             }
             else
             {
-                SubmitScore(this.player1, this.player1Score, this.TotalTime);
+                SubmitScore(this.player1, this.player1Score, this.singlePlayerCombo, this.TotalTime);
 
                 return "U heeft het spel voltooid met een score van: " + singlePlayerScore;
             }
@@ -477,14 +411,19 @@ namespace Memory
         /// <param name="playername">string of the playername</param>
         /// <param name="score">int of the score</param>
         /// <param name="timer">int of the time in seconds</param>
-        private void SubmitScore(string playername, int score, int timer)
+        private void SubmitScore(string playername, int score, int combo, int timer)
         {
             int minutes = timer / 60;
-            int seconds = timer % 60;
+            string seconds = (timer % 60).ToString();
+
+            if (Int32.Parse(seconds) < 10)
+            {
+                seconds = "0" + seconds;
+            }
 
             string time = minutes + " : " + seconds;
 
-            singlePlayerScore += score * 4 / (1 + minutes);
+            singlePlayerScore += score * combo / (1 + minutes);
 
             highscoreList.AddHighscore(new Highscore(playername, singlePlayerScore, time));
             highscoreList.Save();
@@ -505,8 +444,8 @@ namespace Memory
                 {
                     player2Score++;
                 }
-                txtScore_1.Text = player1Score.ToString();
-                txtScore_2.Text = player2Score.ToString();
+                lblScore1.Content = player1Score.ToString();
+                lblScore2.Content = player2Score.ToString();
             }
             else if(singlePlayer)
             {
@@ -516,9 +455,9 @@ namespace Memory
         }
 
         /// <summary>
-        /// 
+        /// Checks if there is a winner by reading in all the flipped cards. If they are all flipped return true
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true/false</returns>
         private bool CheckWinner()
         {
             int imagesFlipped = 0;
@@ -538,6 +477,96 @@ namespace Memory
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Saves all the variables.
+        /// Writes them off in a memory.sav (text) file.
+        /// </summary>
+        public void SaveGamePage()
+        {
+            //Saves the GamePage
+            TextWriter tw = new StreamWriter("memory.sav");
+            tw.WriteLine(cardsOpen);
+            tw.WriteLine(player1);
+            tw.WriteLine(player2);
+            tw.WriteLine(currentPlayer);
+            if (firstCard == null)
+            {
+                firstCard = new Image();
+                tw.WriteLine();
+            }
+            else
+            {
+                tw.WriteLine(firstCard.Tag.ToString());
+            }
+            if (secondCard == null)
+            {
+                secondCard = new Image();
+                tw.WriteLine();
+            }
+            else
+            {
+                tw.WriteLine(secondCard.Tag.ToString());
+            }
+            tw.WriteLine(player1Score);
+            tw.WriteLine(player2Score);
+            tw.WriteLine(singlePlayer);
+            tw.WriteLine(TotalTime);
+            tw.WriteLine(singlePlayerScore);
+
+            // Loops trough all the bgImages and writes them as individual lines in memory.sav
+            foreach (var bg in bgImages)
+            {
+                tw.WriteLine(bg.Tag);
+            }
+            tw.Close();
+        }
+
+        /// <summary>
+        /// Reads all the lines from memory.sav and loads them into all the variables
+        /// </summary>
+        public void loadGame()
+        {
+            firstCard = new Image();
+            secondCard = new Image();
+
+            TextReader tr = new StreamReader("memory.sav");
+
+            cardsOpen = Convert.ToInt32(tr.ReadLine());
+            player1 = tr.ReadLine();
+            player2 = tr.ReadLine();
+            currentPlayer = tr.ReadLine();
+
+            var card1 = (string)tr.ReadLine();
+            var card2 = (string)tr.ReadLine();
+            firstCard.Tag = stringToBitMap(card1);
+            secondCard.Tag = stringToBitMap(card2);
+            firstCard.Source = stringToBitMap(card1);
+            secondCard.Source = stringToBitMap(card2);
+            firstCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+            secondCard.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
+
+            player1Score = Convert.ToInt32(tr.ReadLine());
+            player2Score = Convert.ToInt32(tr.ReadLine());
+            singlePlayer = Convert.ToBoolean(tr.ReadLine());
+            TotalTime = Convert.ToInt32(tr.ReadLine());
+            singlePlayerScore = Convert.ToInt32(tr.ReadLine());
+
+            // Loops trough all the bgImages, reads the lines and adds them to bgImages
+            using (tr)
+            {
+                for (int i = 0; i < (nr_cols * nr_rows); i++)
+                {
+                    Image readImage = new Image();
+                    readImage.Tag = tr.ReadLine();
+                    // All the images need to be unieke and you can't name it just a number so I added a x.
+                    readImage.Name = "x" + i;
+                    bgImages.Add(readImage);
+                }
+            }
+
+            tr.Close();
         }
 
     }

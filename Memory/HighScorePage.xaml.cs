@@ -36,8 +36,9 @@ namespace Memory
         {
             InitializeComponent();
 
-            //sorts the table with highest score first
+            //sorts the table with highest score first then time
             HighscoreTable.Items.SortDescriptions.Add(new SortDescription("Score", ListSortDirection.Descending));
+            HighscoreTable.Items.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Ascending));
 
             //Binds the data to the table on the page
             HighscoreTable.ItemsSource = highscoreList.GetList();

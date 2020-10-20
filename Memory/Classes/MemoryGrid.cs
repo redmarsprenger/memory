@@ -36,13 +36,18 @@ namespace Memory.Classes
         private Image secondCard;
 
         /// <summary>
-        /// 
+        /// Initializes the given values of grid, rows, cols, gamepage, firstcard and secondcard.
+        /// calls InitializeGameGrid(cols, rows);
+        /// Puts new images or loads images in depending if loadGame is true.
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="cols"></param>
         /// <param name="rows"></param>
-        /// <param name="player"></param>
+        /// <param name="backImages"></param>
         /// <param name="gamePage"></param>
+        /// <param name="loadGame"></param>
+        /// <param name="firstCard"></param>
+        /// <param name="secondCard"></param>
         public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame, Image firstCard, Image secondCard)
         {
             this.rows = rows;
@@ -62,50 +67,19 @@ namespace Memory.Classes
             }
         }
 
-//        // Two player grid
-//        public MemoryGrid(Grid grid, int cols, int rows, List<Image> backImages, GamePage gamePage, bool loadGame)
-//        {
-//            this.rows = rows;
-//            this.cols = cols;
-//            this.grid = grid;
-//            this.gamePage = gamePage;
-//            InitializeGameGrid(cols, rows);
-//            if (loadGame)
-//            {
-//                LoadImages(backImages);
-//            }
-//            else
-//            {
-//                AddImages();
-//            }
-//        }
-
         /// <summary>
-        /// 
+        /// Returns the grid.
         /// </summary>
-        /// <param name="savedGrid"></param>
-        /// <param name="player"></param>
-        public MemoryGrid(String savedGrid, string player)
-        {
-            StringReader stringReader = new StringReader(savedGrid);
-            XmlReader xmlReader = XmlReader.Create(stringReader);
-            Grid readerLoadGrid = (Grid)XamlReader.Load(xmlReader);
-            this.grid = readerLoadGrid;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>grid</returns>
         public Grid getGrid()
         {
             return grid;
         }
 
         /// <summary>
-        /// 
+        /// Creates a list of all the images of the active theme, randomizes it and returns the list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>images</returns>
         private List<ImageSource> GetImagesList()
         {
             for (int i = 0; i < (cols * rows); i++)
@@ -128,7 +102,7 @@ namespace Memory.Classes
         private List<ImageSource> randomize(List<ImageSource> imageSources)
         {
             Random random = new Random();
-            for (int i = 0; i < ((cols * rows) / 2); i++)
+            for (int i = 0; i < (cols * rows); i++)
             {
                 int r = random.Next(0, (rows + cols));
                 ImageSource temp = imageSources[r];
@@ -140,7 +114,7 @@ namespace Memory.Classes
         }
 
         /// <summary>
-        /// 
+        /// Loads in the images from GetImagesList() and initializes all the images. 
         /// </summary>
         private void AddImages()
         {
@@ -157,6 +131,7 @@ namespace Memory.Classes
                     backgroundimage.DataContext = backgroundimage.Source;
                     backgroundimage.MouseDown += new MouseButtonEventHandler(gamePage.cardclick);
 
+                    // adds the AnimationImage style to the cards for a pretty load in.
                     Style style = gamePage.FindResource("AnimationImage") as Style;
                     backgroundimage.Style = style;
 
@@ -169,17 +144,20 @@ namespace Memory.Classes
         }
 
         /// <summary>
-        /// 
+        /// Adds the "savedImages" cards to the grid.
         /// </summary>
+        /// <param name="savedImages"></param>
         private void LoadImages(List<Image> savedImages)
         {
             int imageNumber = 0;
+            // loops trough all the rows and cols
             for (int row = 0; row < rows; row++)
             {
                 for (int column = 0; column < cols; column++)
                 {
                     Image backgroundimage = savedImages[imageNumber];
 
+                    // checks if any cards where opened when saved and shows the correct source.
                     if (backgroundimage.Tag.ToString() == firstCard.Source.ToString())
                     {
                         backgroundimage.Source = firstCard.Source;
@@ -197,9 +175,9 @@ namespace Memory.Classes
 
                     backgroundimage.DataContext = new BitmapImage(new Uri("Resources/themes/" + (string)Settings.Default["ThemeName"] + "/achterkant.png", UriKind.Relative));
 
-                    //                    backgroundimage.Tag = images[imageNumber];
                     imageNumber++;
 
+                    // adds the AnimationImage style to the cards for a pretty load in.
                     Style style = gamePage.FindResource("AnimationImage") as Style;
                     backgroundimage.Style = style;
 
@@ -212,7 +190,7 @@ namespace Memory.Classes
         }
 
         /// <summary>
-        /// 
+        /// Adds RowDefinitions and ColumnDefinitions to the grid. The amount depends on the given cols and rows.
         /// </summary>
         /// <param name="cols"></param>
         /// <param name="rows"></param>
@@ -229,9 +207,9 @@ namespace Memory.Classes
         }
 
         /// <summary>
-        /// 
+        /// Returns bgImages
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bgImages</returns>
         public List<Image> getBgImages()
         {
             return bgImages;
